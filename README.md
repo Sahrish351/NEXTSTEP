@@ -23,16 +23,22 @@ NextStep eliminates that initial friction. Instead of asking you to organize eve
 
 ---
 
-## 🧭 Multi-View Workspace Navigation
+## 🧭 12-Destination Architecture & Navigation
 
-NextStep features a complete multi-view workspace with responsive desktop sidebar and mobile navigation:
+NextStep features 12 purposeful destinations organized into workspace, discovery, and system surfaces:
 
-1. **Overview Dashboard:** Answers *"What do I do next?"* with Today's Focus, upcoming tasks, real-time progress, and authentic recent activity logs.
-2. **My Plans:** Complete active plan management, full 7-day schedule with inline editing, safe goal title editor, and plan deletion.
-3. **Today View:** A dedicated single-day focus mode with Day 1–7 stepper navigation, task instructions, inline editing, and celebratory feedback.
-4. **Progress View:** Transparent completion metrics, 7-day visual roadmap, completed vs. remaining breakdown, and a 100% milestone celebration banner.
-5. **Settings View:** Browser data management, native JSON plan export, validated JSON plan import with overwrite confirmation, and safe plan reset.
-6. **Public Landing Page:** High-impact hero, problem breakdown, 4 domain use cases (Career, Study, Skill, Project), benefits, interactive plan preview, and smooth navigation to the plan creator.
+1. **Home / Landing Page (`home`):** Hero photographic composition, problem breakdown, 4 photo-enriched use cases (Job Seekers, Students, Skill Learners, Builders), interactive plan preview, and direct creation CTA.
+2. **Overview Dashboard (`overview`):** Answers *"What do I do next?"* with Today's Focus card, 7-day progress timeline dots, upcoming steps, and authentic activity logs.
+3. **My Plans (`plans`):** Complete active plan management, full 7-day task schedule stream with inline editing, safe goal title modal editor, and plan deletion.
+4. **Today View (`today`):** Dedicated single-day execution mode with Day 1–7 stepper navigation, task instructions, inline editing, and celebratory feedback.
+5. **Explore Goals (`explore`):** Photo-enriched goal directory with category filter pills, real-time search, and 1-click *"Start with this goal"* button that prefills the creation wizard.
+6. **Plan Builder (`builder`):** 3-step creation wizard (Goal definition with 120-char limit, Category selection across 5 domains, and pre-launch 7-day plan preview).
+7. **Progress Track (`progress`):** Completion analytics, visual 7-day milestone tracker, completed vs. remaining breakdown, and celebratory completion banner.
+8. **Weekly Reflection (`reflection`):** A weekly retrospective tool with 5 structured learning prompts, private browser journaling, and reflection history log.
+9. **Inspiration Library (`inspiration`):** Ready-to-use goal blueprints with target audience descriptions, core problems, and immediate Day 01 starting steps.
+10. **Milestones / Achievements (`achievements`):** 5 derived milestone badges (*First Step, Action Taker, Consistent Momentum, Thoughtful Learner, The Finish Line*) calculated live from authentic user actions without fake streaks.
+11. **Settings & Data (`settings`):** Browser storage inspection, native JSON plan export, schema-validated JSON import with overwrite safeguards, and safe plan reset.
+12. **About NextStep (`about`):** Editorial storytelling on cognitive chunking, zero-friction local privacy, technical architecture, and photographer credits.
 
 ---
 
@@ -150,11 +156,19 @@ All approved planning artifacts are maintained directly in the `devpost/` folder
 
 ---
 
-## 🎨 Design & Attribution
+## 🎨 Design & Photography Attribution
 
 - **Color Palette:** Warm Ivory (`#FAF8F3`), Forest Green (`#246B52`), Deep Forest (`#194C3A`), Deep Charcoal (`#202720`), Soft Sage (`#DCEBE1`), Restrained Coral (`#E98770`).
 - **Typography:** [DM Serif Display](https://fonts.google.com/specimen/DM+Serif+Display) and [DM Sans](https://fonts.google.com/specimen/DM+Sans) designed by Colophon Foundry (Open Font License).
 - **Icons:** [Lucide Icons](https://lucide.dev/) (ISC License).
+- **Curated Photography:** Sourced under the [Unsplash Free License](https://unsplash.com/license) with photographer attribution:
+  - Andrew Neel (`heroWorkspace`)
+  - Christina @ wocintechchat.com (`careerInterview`)
+  - Priscilla Du Preez (`studentStudy`)
+  - John Schnobrich (`skillPractice`)
+  - Christopher Gower (`creatorProject`)
+  - Cathryn Lavery (`reflectionJournal`)
+  - Arto Marttinen (`calmHabit`)
 
 ---
 

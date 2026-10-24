@@ -4,7 +4,7 @@ import {
   LayoutDashboard, 
   Layers, 
   CalendarCheck, 
-  BarChart3, 
+  Compass, 
   Settings 
 } from 'lucide-react';
 
@@ -15,11 +15,11 @@ interface MobileNavProps {
 
 export const MobileNav: React.FC<MobileNavProps> = ({ currentView, onNavigate }) => {
   const navItems: { view: ViewType; label: string; icon: React.ReactNode }[] = [
-    { view: 'overview', label: 'Overview', icon: <LayoutDashboard size={20} /> },
-    { view: 'plans', label: 'Plans', icon: <Layers size={20} /> },
-    { view: 'today', label: 'Today', icon: <CalendarCheck size={20} /> },
-    { view: 'progress', label: 'Progress', icon: <BarChart3 size={20} /> },
-    { view: 'settings', label: 'Settings', icon: <Settings size={20} /> },
+    { view: 'overview', label: 'Overview', icon: <LayoutDashboard size={19} /> },
+    { view: 'plans', label: 'Plans', icon: <Layers size={19} /> },
+    { view: 'today', label: 'Today', icon: <CalendarCheck size={19} /> },
+    { view: 'explore', label: 'Explore', icon: <Compass size={19} /> },
+    { view: 'settings', label: 'Settings', icon: <Settings size={19} /> },
   ];
 
   return (
@@ -74,4 +74,3 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentView, onNavigate })
     </nav>
   );
 };
-

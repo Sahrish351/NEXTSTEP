@@ -1,4 +1,4 @@
-import { Plan, ActivityLog } from '../types';
+import { Plan, ActivityLog, Reflection } from '../types';
 
 const STORAGE_KEY = 'nextstep_active_plan';
 
@@ -19,7 +19,6 @@ export function loadSavedPlan(): { plan: Plan | null; error: boolean } {
       Array.isArray(parsed.tasks) &&
       parsed.tasks.length === 7
     ) {
-      // Ensure activities array exists for backwards compatibility
       const plan: Plan = {
         ...parsed,
         activities: Array.isArray(parsed.activities) ? parsed.activities : [
@@ -30,6 +29,7 @@ export function loadSavedPlan(): { plan: Plan | null; error: boolean } {
             message: `Plan created for "${parsed.goal}"`
           }
         ],
+        reflections: Array.isArray(parsed.reflections) ? parsed.reflections : [],
         updatedAt: parsed.updatedAt || parsed.createdAt || new Date().toISOString()
       };
       return { plan, error: false };
@@ -116,7 +116,8 @@ export function validatePlanJSON(jsonString: string): { valid: boolean; plan?: P
           type: 'created',
           message: `Plan imported for "${parsed.goal}"`
         }
-      ]
+      ],
+      reflections: Array.isArray(parsed.reflections) ? parsed.reflections : []
     };
 
     return { valid: true, plan };
@@ -136,6 +137,30 @@ export function logActivity(plan: Plan, type: ActivityLog['type'], message: stri
   return {
     ...plan,
     updatedAt: new Date().toISOString(),
-    activities: [newActivity, ...(plan.activities || [])].slice(0, 15) // Keep last 15 actions
+    activities: [newActivity, ...(plan.activities || [])].slice(0, 20)
+  };
+}
+
+export function addReflectionToPlan(plan: Plan, reflection: Omit<Reflection, 'id' | 'date'>): Plan {
+  const newReflection: Reflection = {
+    ...reflection,
+    id: `refl-${Date.now().toString(36)}`,
+    date: new Date().toISOString(),
+  };
+
+  let updated: Plan = {
+    ...plan,
+    updatedAt: new Date().toISOString(),
+    reflections: [newReflection, ...(plan.reflections || [])]
+  };
+
+  return logActivity(updated, 'reflection_saved', 'Saved weekly progress reflection');
+}
+
+export function deleteReflectionFromPlan(plan: Plan, reflectionId: string): Plan {
+  return {
+    ...plan,
+    updatedAt: new Date().toISOString(),
+    reflections: (plan.reflections || []).filter(r => r.id !== reflectionId)
   };
 }

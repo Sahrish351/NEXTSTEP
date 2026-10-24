@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Plan, Category, ViewType, Task } from './types';
+import { Plan, Category, ViewType, Task, Reflection } from './types';
 import { 
   loadSavedPlan, 
   savePlan, 
   clearSavedPlan, 
-  logActivity 
+  logActivity,
+  addReflectionToPlan,
+  deleteReflectionFromPlan
 } from './utils/storage';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
@@ -17,12 +19,18 @@ import { MyPlansView } from './views/MyPlansView';
 import { TodayView } from './views/TodayView';
 import { ProgressView } from './views/ProgressView';
 import { SettingsView } from './views/SettingsView';
+import { ExploreGoalsView } from './views/ExploreGoalsView';
+import { ReflectionView } from './views/ReflectionView';
+import { InspirationLibraryView } from './views/InspirationLibraryView';
+import { AchievementsView } from './views/AchievementsView';
+import { AboutView } from './views/AboutView';
 import { AlertCircle, RotateCcw } from 'lucide-react';
 
 export const App: React.FC = () => {
   const [activePlan, setActivePlan] = useState<Plan | null>(null);
-  const [currentView, setCurrentView] = useState<ViewType>('landing');
+  const [currentView, setCurrentView] = useState<ViewType>('home');
   const [isWizardOpen, setIsWizardOpen] = useState(false);
+  const [wizardPrefill, setWizardPrefill] = useState<{ goal: string; category: Category } | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [storageError, setStorageError] = useState(false);
 
@@ -31,14 +39,26 @@ export const App: React.FC = () => {
     const { plan, error } = loadSavedPlan();
     if (error) {
       setStorageError(true);
-      setCurrentView('landing');
+      setCurrentView('home');
     } else if (plan) {
       setActivePlan(plan);
       setCurrentView('overview');
     } else {
-      setCurrentView('landing');
+      setCurrentView('home');
     }
   }, []);
+
+  // Handler: Open creation wizard without prefill
+  const handleOpenNewWizard = () => {
+    setWizardPrefill(null);
+    setIsWizardOpen(true);
+  };
+
+  // Handler: Open creation wizard with goal/category prefill
+  const handleStartGoalWithPrefill = (goal: string, category: Category) => {
+    setWizardPrefill({ goal, category });
+    setIsWizardOpen(true);
+  };
 
   // Handler: Complete Plan Creation from Wizard
   const handleCompleteWizard = (goal: string, category: Category, tasks: Task[]) => {
@@ -56,12 +76,14 @@ export const App: React.FC = () => {
           type: 'created',
           message: `Created 7-day plan for "${goal}"`
         }
-      ]
+      ],
+      reflections: []
     };
 
     setActivePlan(newPlan);
     savePlan(newPlan);
     setIsWizardOpen(false);
+    setWizardPrefill(null);
     setCurrentView('overview');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -129,12 +151,28 @@ export const App: React.FC = () => {
     savePlan(updatedPlan);
   };
 
+  // Handler: Save Weekly Reflection
+  const handleSaveReflection = (reflection: Omit<Reflection, 'id' | 'date'>) => {
+    if (!activePlan) return;
+    const updatedPlan = addReflectionToPlan(activePlan, reflection);
+    setActivePlan(updatedPlan);
+    savePlan(updatedPlan);
+  };
+
+  // Handler: Delete Weekly Reflection
+  const handleDeleteReflection = (reflectionId: string) => {
+    if (!activePlan) return;
+    const updatedPlan = deleteReflectionFromPlan(activePlan, reflectionId);
+    setActivePlan(updatedPlan);
+    savePlan(updatedPlan);
+  };
+
   // Handler: Safe Plan Deletion
   const handleConfirmDelete = () => {
     clearSavedPlan();
     setActivePlan(null);
     setIsDeleteModalOpen(false);
-    setCurrentView('landing');
+    setCurrentView('home');
   };
 
   // Handler: Import Plan from JSON
@@ -149,7 +187,7 @@ export const App: React.FC = () => {
     clearSavedPlan();
     setStorageError(false);
     setActivePlan(null);
-    setCurrentView('landing');
+    setCurrentView('home');
   };
 
   return (
@@ -192,20 +230,21 @@ export const App: React.FC = () => {
         </div>
       )}
 
-      {/* Public vs Workspace Rendering */}
-      {currentView === 'landing' ? (
+      {/* Public Home vs Workspace Rendering */}
+      {currentView === 'home' ? (
         <>
           <Header
             currentView={currentView}
             onNavigate={(view) => setCurrentView(view)}
             activePlan={activePlan}
-            onOpenCreate={() => setIsWizardOpen(true)}
+            onOpenCreate={handleOpenNewWizard}
           />
           <main>
             <LandingPage
-              onOpenCreate={() => setIsWizardOpen(true)}
+              onOpenCreate={handleOpenNewWizard}
               hasActivePlan={!!activePlan}
               onGoToWorkspace={() => setCurrentView('overview')}
+              onExploreGoals={() => setCurrentView('explore')}
             />
           </main>
         </>
@@ -216,7 +255,7 @@ export const App: React.FC = () => {
             currentView={currentView}
             onNavigate={(view) => setCurrentView(view)}
             activePlan={activePlan}
-            onOpenCreate={() => setIsWizardOpen(true)}
+            onOpenCreate={handleOpenNewWizard}
           />
 
           {/* Main Content Viewport */}
@@ -227,7 +266,7 @@ export const App: React.FC = () => {
                   plan={activePlan}
                   onNavigate={(view) => setCurrentView(view)}
                   onToggleTask={handleToggleTask}
-                  onOpenCreate={() => setIsWizardOpen(true)}
+                  onOpenCreate={handleOpenNewWizard}
                 />
               )}
 
@@ -238,7 +277,7 @@ export const App: React.FC = () => {
                   onUpdateTask={handleUpdateTask}
                   onUpdateGoal={handleUpdateGoal}
                   onRequestDelete={() => setIsDeleteModalOpen(true)}
-                  onOpenCreate={() => setIsWizardOpen(true)}
+                  onOpenCreate={handleOpenNewWizard}
                 />
               )}
 
@@ -247,7 +286,7 @@ export const App: React.FC = () => {
                   plan={activePlan}
                   onToggleTask={handleToggleTask}
                   onUpdateTask={handleUpdateTask}
-                  onOpenCreate={() => setIsWizardOpen(true)}
+                  onOpenCreate={handleOpenNewWizard}
                 />
               )}
 
@@ -255,7 +294,45 @@ export const App: React.FC = () => {
                 <ProgressView
                   plan={activePlan}
                   onNavigate={(view) => setCurrentView(view)}
-                  onOpenCreate={() => setIsWizardOpen(true)}
+                  onOpenCreate={handleOpenNewWizard}
+                />
+              )}
+
+              {currentView === 'explore' && (
+                <ExploreGoalsView
+                  onSelectGoal={handleStartGoalWithPrefill}
+                  onOpenCustomCreate={handleOpenNewWizard}
+                />
+              )}
+
+              {currentView === 'builder' && (
+                <ExploreGoalsView
+                  onSelectGoal={handleStartGoalWithPrefill}
+                  onOpenCustomCreate={handleOpenNewWizard}
+                />
+              )}
+
+              {currentView === 'reflection' && (
+                <ReflectionView
+                  plan={activePlan}
+                  onSaveReflection={handleSaveReflection}
+                  onDeleteReflection={handleDeleteReflection}
+                  onOpenCreate={handleOpenNewWizard}
+                />
+              )}
+
+              {currentView === 'inspiration' && (
+                <InspirationLibraryView
+                  onSelectGoal={handleStartGoalWithPrefill}
+                  onOpenCreate={handleOpenNewWizard}
+                />
+              )}
+
+              {currentView === 'achievements' && (
+                <AchievementsView
+                  plan={activePlan}
+                  onOpenCreate={handleOpenNewWizard}
+                  onNavigate={(view) => setCurrentView(view)}
                 />
               )}
 
@@ -266,6 +343,10 @@ export const App: React.FC = () => {
                   onRequestReset={() => setIsDeleteModalOpen(true)}
                   onNavigate={(view) => setCurrentView(view)}
                 />
+              )}
+
+              {currentView === 'about' && (
+                <AboutView />
               )}
             </div>
           </div>
@@ -281,8 +362,13 @@ export const App: React.FC = () => {
       {/* Creation Wizard Modal */}
       <PlanWizard
         isOpen={isWizardOpen}
-        onClose={() => setIsWizardOpen(false)}
+        onClose={() => {
+          setIsWizardOpen(false);
+          setWizardPrefill(null);
+        }}
         onComplete={handleCompleteWizard}
+        initialGoal={wizardPrefill?.goal}
+        initialCategory={wizardPrefill?.category}
       />
 
       {/* Deletion Confirmation Modal */}
@@ -292,7 +378,7 @@ export const App: React.FC = () => {
         onConfirm={handleConfirmDelete}
       />
 
-      {/* Compact Universal Footer */}
+      {/* Universal Footer */}
       <footer style={{
         marginTop: 'auto',
         borderTop: '1px solid var(--border)',

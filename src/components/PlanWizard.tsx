@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Category, Task } from '../types';
 import { generateTasksForGoal } from '../data/templates';
 import { 
@@ -19,6 +19,8 @@ interface PlanWizardProps {
   isOpen: boolean;
   onClose: () => void;
   onComplete: (goal: string, category: Category, tasks: Task[]) => void;
+  initialGoal?: string;
+  initialCategory?: Category;
 }
 
 const CATEGORIES: { name: Category; icon: React.ReactNode; label: string; description: string }[] = [
@@ -54,12 +56,33 @@ const CATEGORIES: { name: Category; icon: React.ReactNode; label: string; descri
   },
 ];
 
-export const PlanWizard: React.FC<PlanWizardProps> = ({ isOpen, onClose, onComplete }) => {
+export const PlanWizard: React.FC<PlanWizardProps> = ({ 
+  isOpen, 
+  onClose, 
+  onComplete,
+  initialGoal,
+  initialCategory 
+}) => {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [goal, setGoal] = useState('');
   const [category, setCategory] = useState<Category>('Career');
   const [validationError, setValidationError] = useState<string | null>(null);
   const [previewTasks, setPreviewTasks] = useState<Task[]>([]);
+
+  useEffect(() => {
+    if (isOpen) {
+      if (initialGoal) {
+        setGoal(initialGoal);
+        setCategory(initialCategory || 'Career');
+        setStep(2); // directly to category review/confirmation
+      } else {
+        setGoal('');
+        setCategory(initialCategory || 'Career');
+        setStep(1);
+      }
+      setValidationError(null);
+    }
+  }, [isOpen, initialGoal, initialCategory]);
 
   if (!isOpen) return null;
 

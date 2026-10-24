@@ -1,4 +1,5 @@
 import React from 'react';
+import { IMAGES } from '../data/images';
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -6,25 +7,28 @@ import {
   BookOpen, 
   Briefcase, 
   Wrench, 
-  FolderKanban
+  FolderKanban,
+  Compass
 } from 'lucide-react';
 
 interface LandingPageProps {
   onOpenCreate: () => void;
   hasActivePlan: boolean;
   onGoToWorkspace: () => void;
+  onExploreGoals?: () => void;
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({
   onOpenCreate,
   hasActivePlan,
   onGoToWorkspace,
+  onExploreGoals,
 }) => {
   return (
     <div style={{ paddingBottom: '3.5rem' }}>
       {/* Hero Section */}
       <section style={{
-        padding: 'clamp(3rem, 6vw, 5rem) 0 3rem 0',
+        padding: 'clamp(2.5rem, 5vw, 4rem) 0 2rem 0',
         textAlign: 'center',
       }}>
         <div className="content-wrapper">
@@ -45,7 +49,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           <h1 className="serif-heading" style={{
-            fontSize: 'clamp(2.5rem, 5.5vw, 4.2rem)',
+            fontSize: 'clamp(2.4rem, 5vw, 3.8rem)',
             color: 'var(--primary-dark)',
             maxWidth: '860px',
             margin: '0 auto 1.25rem auto',
@@ -66,7 +70,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             No blank screens, no complicated tools—just an organized, editable starting path to get you moving and keep you consistent.
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
             <button
               onClick={onOpenCreate}
               className="btn-primary"
@@ -92,6 +96,59 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 See how it works
               </a>
             )}
+            {onExploreGoals && (
+              <button
+                type="button"
+                onClick={onExploreGoals}
+                className="btn-ghost"
+                style={{ fontSize: '0.95rem', padding: '0.9rem 1.2rem', gap: '0.4rem' }}
+              >
+                <Compass size={17} />
+                <span>Explore sample goals</span>
+              </button>
+            )}
+          </div>
+
+          {/* Photographic Hero Banner */}
+          <div style={{
+            maxWidth: '920px',
+            margin: '0 auto',
+            borderRadius: 'var(--radius-lg)',
+            overflow: 'hidden',
+            boxShadow: 'var(--shadow-md)',
+            border: '1px solid var(--border-light)',
+            position: 'relative',
+            height: 'clamp(220px, 32vw, 340px)',
+            background: IMAGES.heroWorkspace.fallbackGradient
+          }}>
+            <img
+              src={IMAGES.heroWorkspace.url}
+              alt={IMAGES.heroWorkspace.alt}
+              onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(180deg, rgba(32,39,32,0.1) 0%, rgba(32,39,32,0.6) 100%)',
+              display: 'flex',
+              alignItems: 'flex-end',
+              justifyContent: 'space-between',
+              padding: '1.5rem 2rem',
+              color: '#FFFFFF'
+            }}>
+              <div style={{ textAlign: 'left' }}>
+                <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, opacity: 0.9 }}>
+                  Mindful Planning
+                </span>
+                <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 500 }}>
+                  A clear morning starts with a single defined action.
+                </div>
+              </div>
+              <span style={{ fontSize: '0.75rem', opacity: 0.75 }} className="desktop-only-text">
+                Photo by Andrew Neel via Unsplash
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -231,51 +288,147 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: '1.25rem'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '1.5rem'
           }}>
-            {/* Use Case 1 */}
-            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '1.5rem', boxShadow: 'var(--shadow-sm)' }}>
-              <div style={{ width: '38px', height: '38px', borderRadius: '8px', background: 'var(--surface-sage)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.85rem' }}>
-                <Briefcase size={20} />
+            {/* Use Case 1: Job Seekers */}
+            <div style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-md)',
+              overflow: 'hidden',
+              boxShadow: 'var(--shadow-sm)',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              <div style={{
+                height: '140px',
+                background: IMAGES.careerInterview.fallbackGradient,
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                <img
+                  src={IMAGES.careerInterview.url}
+                  alt={IMAGES.careerInterview.alt}
+                  loading="lazy"
+                  onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
-              <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', marginBottom: '0.35rem' }}>Job Seekers</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                Break daunting interview prep into 7 sequenced days: job analysis, technical drills, STAR stories, and timed mock sessions.
-              </p>
+              <div style={{ padding: '1.25rem 1.4rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                  <Briefcase size={18} />
+                  <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', margin: 0 }}>Job Seekers</h3>
+                </div>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>
+                  Break daunting interview prep into 7 sequenced days: job analysis, technical drills, STAR stories, and timed mock sessions.
+                </p>
+              </div>
             </div>
 
-            {/* Use Case 2 */}
-            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '1.5rem', boxShadow: 'var(--shadow-sm)' }}>
-              <div style={{ width: '38px', height: '38px', borderRadius: '8px', background: 'var(--surface-sage)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.85rem' }}>
-                <BookOpen size={20} />
+            {/* Use Case 2: Students */}
+            <div style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-md)',
+              overflow: 'hidden',
+              boxShadow: 'var(--shadow-sm)',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              <div style={{
+                height: '140px',
+                background: IMAGES.studentStudy.fallbackGradient,
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                <img
+                  src={IMAGES.studentStudy.url}
+                  alt={IMAGES.studentStudy.alt}
+                  loading="lazy"
+                  onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
-              <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', marginBottom: '0.35rem' }}>Students</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                Conquer upcoming exams by dividing syllabus topics into daily active-recall notes, practice questions, and past paper reviews.
-              </p>
+              <div style={{ padding: '1.25rem 1.4rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                  <BookOpen size={18} />
+                  <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', margin: 0 }}>Students</h3>
+                </div>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>
+                  Conquer upcoming exams by dividing syllabus topics into daily active-recall notes, practice questions, and past paper reviews.
+                </p>
+              </div>
             </div>
 
-            {/* Use Case 3 */}
-            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '1.5rem', boxShadow: 'var(--shadow-sm)' }}>
-              <div style={{ width: '38px', height: '38px', borderRadius: '8px', background: 'var(--surface-sage)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.85rem' }}>
-                <Wrench size={20} />
+            {/* Use Case 3: Skill Learners */}
+            <div style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-md)',
+              overflow: 'hidden',
+              boxShadow: 'var(--shadow-sm)',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              <div style={{
+                height: '140px',
+                background: IMAGES.skillPractice.fallbackGradient,
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                <img
+                  src={IMAGES.skillPractice.url}
+                  alt={IMAGES.skillPractice.alt}
+                  loading="lazy"
+                  onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
-              <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', marginBottom: '0.35rem' }}>Skill Learners</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                Master a new tool or programming language through progressive daily milestones from setup to standalone micro-projects.
-              </p>
+              <div style={{ padding: '1.25rem 1.4rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                  <Wrench size={18} />
+                  <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', margin: 0 }}>Skill Learners</h3>
+                </div>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>
+                  Master a new tool or programming language through progressive daily milestones from setup to standalone micro-projects.
+                </p>
+              </div>
             </div>
 
-            {/* Use Case 4 */}
-            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '1.5rem', boxShadow: 'var(--shadow-sm)' }}>
-              <div style={{ width: '38px', height: '38px', borderRadius: '8px', background: 'var(--surface-sage)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.85rem' }}>
-                <FolderKanban size={20} />
+            {/* Use Case 4: Builders & Creators */}
+            <div style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-md)',
+              overflow: 'hidden',
+              boxShadow: 'var(--shadow-sm)',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              <div style={{
+                height: '140px',
+                background: IMAGES.creatorProject.fallbackGradient,
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                <img
+                  src={IMAGES.creatorProject.url}
+                  alt={IMAGES.creatorProject.alt}
+                  loading="lazy"
+                  onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
-              <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', marginBottom: '0.35rem' }}>Builders &amp; Creators</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                Turn ambitious side projects into realistic 7-day runways: scope definition, wireframes, core implementation, polish, and demo.
-              </p>
+              <div style={{ padding: '1.25rem 1.4rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                  <FolderKanban size={18} />
+                  <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', margin: 0 }}>Builders &amp; Creators</h3>
+                </div>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: 1.55, margin: 0 }}>
+                  Turn ambitious side projects into realistic 7-day runways: scope definition, wireframes, core implementation, polish, and demo.
+                </p>
+              </div>
             </div>
           </div>
         </div>

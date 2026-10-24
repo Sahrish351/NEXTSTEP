@@ -15,7 +15,7 @@ export const Header: React.FC<HeaderProps> = ({
   activePlan,
   onOpenCreate,
 }) => {
-  const isLanding = currentView === 'landing';
+  const isHome = currentView === 'home';
 
   return (
     <header style={{
@@ -35,10 +35,10 @@ export const Header: React.FC<HeaderProps> = ({
       }}>
         {/* Brand */}
         <div 
-          onClick={() => onNavigate(activePlan ? 'overview' : 'landing')}
+          onClick={() => onNavigate(activePlan ? 'overview' : 'home')}
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate(activePlan ? 'overview' : 'landing'); }}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate(activePlan ? 'overview' : 'home'); }}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -76,8 +76,16 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          {isLanding ? (
+          {isHome ? (
             <>
+              <button
+                type="button"
+                onClick={() => onNavigate('explore')}
+                className="btn-ghost"
+                style={{ fontSize: '0.85rem', padding: '0.45rem 0.75rem' }}
+              >
+                Explore Goals
+              </button>
               {activePlan && (
                 <button
                   type="button"
@@ -101,13 +109,13 @@ export const Header: React.FC<HeaderProps> = ({
             <>
               <button
                 type="button"
-                onClick={() => onNavigate('landing')}
+                onClick={() => onNavigate('home')}
                 className="btn-ghost"
                 style={{ fontSize: '0.85rem', padding: '0.45rem 0.75rem' }}
-                title="View Landing Page"
+                title="View Home Page"
               >
                 <Home size={15} />
-                <span className="desktop-only-text">About</span>
+                <span className="desktop-only-text">Home</span>
               </button>
 
               <button

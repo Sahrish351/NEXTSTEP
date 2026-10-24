@@ -3,45 +3,34 @@ doc: scope
 status: approved
 ---
 
-# NextStep — Make your next step obvious (Product Transformation)
+# NextStep — Make your next step obvious (Redesign & Expansion Scope)
 
-A comprehensive personal goal-execution workspace that turns overwhelming goals into actionable seven-day plans, providing daily focus, honest progress tracking, and complete plan management within the browser.
+An art-directed, photo-enriched goal-execution and personal-growth platform that turns overwhelming ambitions into clear seven-day action plans, guiding users through daily execution, honest progress tracking, weekly reflection, and practical inspiration.
 
 ## The Unique Kernel
-Instant cognitive relief transformed into structured daily execution. Instead of confronting a blank screen and freezing on "where do I begin?", NextStep gives the user an organized 7-day sequence, answers *"What should I focus on today?"*, and provides an honest, encouraging workspace to sustain momentum: *"I know what to do next, and I can actually start."*
+Immediate cognitive clarity paired with sustained daily focus:
+A user arrives with a vague, intimidating goal and leaves in under two minutes with an organized 7-day starter plan, a single defined action for today, an honest visual progress roadmap, and a space for structured weekly reflection: *"I know what to do next, and I can actually start."*
 
-## Who It's For
-- **Job Seekers:** Organizing multi-step technical or behavioral interview preparation.
-- **Students:** Dividing broad examination topics into 7 manageable daily study sprints.
-- **Skill Learners:** Establishing an everyday hands-on practice runway.
-- **Creators & Builders:** Structuring personal projects into bite-sized daily execution milestones.
+## The 12 Distinct Destinations
+1. **Public Home (`home`):** Editorial marketing experience combining warm lifestyle photography, interactive plan preview, 4 domain use cases, and direct plan creator entry.
+2. **Overview Dashboard (`overview`):** Action-focused cockpit answering *"What do I do next?"* with Today's Focus, 7-day timeline, upcoming tasks, and genuine activity logs.
+3. **My Plans (`plans`):** Complete active 7-day schedule, inline task editing, goal title modal, and deletion safeguards.
+4. **Today (`today`):** Distraction-free single-day execution mode with Day 1–7 stepper and completion celebration.
+5. **Explore Goals (`explore`):** Image-led discovery gallery categorized by domain (Career, Study, Skill, Projects, Personal) with one-click goal prefill.
+6. **Plan Builder (`builder`):** 4-step guided creator wizard (Goal → Category → Plan Preview → Launch).
+7. **Progress (`progress`):** Transparent completion metrics, 7-day visual roadmap, and 100% milestone celebration.
+8. **Weekly Reflection (`reflection`):** Calming, purposeful writing workflow to capture wins, blockers, and next horizon.
+9. **Inspiration Library (`inspiration`):** Curated catalog of tangible goals with suggested first steps and prefilled launches.
+10. **Achievements (`achievements`):** Milestone system derived 100% from actual user actions (First plan, First task, 3 tasks, Reflection saved, 7/7 completed).
+11. **Settings & Data (`settings`):** Local browser data management, JSON plan export, validated JSON import, and safe reset.
+12. **About NextStep (`about`):** Editorial storytelling page detailing the cognitive design principles, 7-day philosophy, privacy model, and attributions.
 
-## The Core Loop & Expanded Surfaces
-1. **Discover & Land:** User learns about the 7-day philosophy via the public landing page with real plan previews, use-case examples, and benefits.
-2. **Multi-Step Guided Creation:** User enters a goal, selects from 5 categories (*Career, Study, Skill Building, Personal Project, Other*), previews the 7 proposed tasks, and confirms creation.
-3. **Overview Dashboard:** Answers *"What do I do next?"* with Today's Focus, upcoming tasks, real-time progress, and genuine recent activity logs.
-4. **Today View:** A dedicated single-day focus mode with previous/next day stepping, detailed instructions, inline editing, and celebratory feedback.
-5. **My Plans View:** Complete plan overview, goal editing, full 7-day schedule, and safe deletion.
-6. **Progress View:** Visual 7-day tracker, completed vs. remaining breakdown, milestone celebration at 100%, and practical encouragement.
-7. **Settings View:** Browser storage management, JSON plan export, validated JSON plan import with overwrite confirmation, and plan reset.
+## Visual Identity & Creative Direction
+- **Color Palette:** Warm ivory background (`#FAF8F3`), Forest green primary (`#246B52`), Deep charcoal text (`#202720`), Soft sage surfaces (`#DCEBE1`), Restrained coral accent (`#E98770`), Clean white surfaces (`#FFFFFF`).
+- **Typography:** `DM Serif Display` for expressive headlines, `DM Sans` for interfaces, forms, and data.
+- **Photography:** Curated, license-compliant Unsplash photography highlighting real focus, study, craft, and creativity with graceful offline fallbacks and descriptive alt text.
 
-## Inspiration & Identity
-- **Design System:** Warm ivory background (`#FAF8F3`), Forest green primary (`#246B52`), Deep charcoal text (`#202720`), Soft sage surfaces (`#DCEBE1`), Restrained coral accent (`#E98770`), Clean white cards (`#FFFFFF`).
-- **Typography:** `DM Serif Display` for elegant headlines and `DM Sans` for accessible UI copy and dashboard data.
-- **Tone:** Calm, practical, encouraging, and honest.
-
-## The POC Boundary (Expanded)
-- Responsive multi-view navigation: **Overview**, **My Plans**, **Today**, **Progress**, **Settings**, and **Public Landing Page**.
-- Multi-step plan creator wizard with plan preview prior to creation.
-- Daily focus engine: automatically identifies the next unfinished day with manual day-switcher.
-- Real-time activity logging: logs actual user actions (plan created, task completed/uncompleted, task edited).
-- Inline task card editing with Save/Cancel safeguards and non-empty validation.
-- JSON plan export & safe JSON plan import with schema validation and confirmation.
-- Safe plan deletion protected by confirmation modal.
-- Resilient `localStorage` persistence and corrupted data recovery.
-
-## Explicitly Cut (Preserving Honesty)
-- No fake user accounts or authentication walls.
-- No remote cloud databases (keeps MVP zero-latency, private, and zero-cost).
-- No fake AI generation claims (templates are honest, categorized, and fully editable).
-- No fake analytics or fabricated metrics.
+## Persistence & Boundary Integrity
+- All plan state, tasks, edits, activities, and reflections persist in browser `localStorage`.
+- Native JSON export and schema-validated JSON import ensure zero-loss portability.
+- Strict honesty: No fake AI claims, no fabricated testimonials, no invented user counts or artificial streak counters.

@@ -5,6 +5,11 @@ import {
   Layers, 
   CalendarCheck, 
   BarChart3, 
+  BookMarked,
+  Trophy,
+  Compass,
+  Lightbulb,
+  Info,
   Settings, 
   PlusCircle, 
   Sparkles,
@@ -27,28 +32,36 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const completedCount = activePlan ? activePlan.tasks.filter(t => t.completed).length : 0;
   const progressPercent = activePlan ? Math.round((completedCount / 7) * 100) : 0;
 
-  const navItems: { view: ViewType; label: string; icon: React.ReactNode }[] = [
-    { view: 'overview', label: 'Overview', icon: <LayoutDashboard size={18} /> },
-    { view: 'plans', label: 'My Plans', icon: <Layers size={18} /> },
-    { view: 'today', label: 'Today', icon: <CalendarCheck size={18} /> },
-    { view: 'progress', label: 'Progress', icon: <BarChart3 size={18} /> },
-    { view: 'settings', label: 'Settings', icon: <Settings size={18} /> },
+  const workspaceLinks: { view: ViewType; label: string; icon: React.ReactNode }[] = [
+    { view: 'overview', label: 'Overview', icon: <LayoutDashboard size={17} /> },
+    { view: 'plans', label: 'My Plans', icon: <Layers size={17} /> },
+    { view: 'today', label: 'Today View', icon: <CalendarCheck size={17} /> },
+    { view: 'progress', label: 'Progress Track', icon: <BarChart3 size={17} /> },
+    { view: 'reflection', label: 'Weekly Reflection', icon: <BookMarked size={17} /> },
+    { view: 'achievements', label: 'Milestones', icon: <Trophy size={17} /> },
+  ];
+
+  const exploreLinks: { view: ViewType; label: string; icon: React.ReactNode }[] = [
+    { view: 'explore', label: 'Explore Goals', icon: <Compass size={17} /> },
+    { view: 'inspiration', label: 'Inspiration Library', icon: <Lightbulb size={17} /> },
+    { view: 'about', label: 'About NextStep', icon: <Info size={17} /> },
+    { view: 'settings', label: 'Settings & Data', icon: <Settings size={17} /> },
   ];
 
   return (
     <aside className="app-sidebar" aria-label="Main Navigation">
       {/* Brand Header */}
       <div 
-        onClick={() => onNavigate('landing')}
+        onClick={() => onNavigate('home')}
         style={{
           display: 'flex',
           alignItems: 'center',
           gap: '0.65rem',
-          padding: '1.25rem 1.25rem 1.5rem 1.25rem',
+          padding: '1.25rem 1.25rem 1.25rem 1.25rem',
           borderBottom: '1px solid var(--border-light)',
           cursor: 'pointer'
         }}
-        title="Go to Landing Page"
+        title="Go to Home"
       >
         <div style={{
           width: '32px',
@@ -59,7 +72,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: 'var(--shadow-sm)'
+          boxShadow: 'var(--shadow-sm)',
+          flexShrink: 0
         }}>
           <Sparkles size={16} />
         </div>
@@ -75,26 +89,27 @@ export const Sidebar: React.FC<SidebarProps> = ({
             NextStep
           </span>
           <span style={{ fontSize: '0.72rem', color: 'var(--text-light)', fontWeight: 500 }}>
-            Goal Execution Workspace
+            Goal Execution Platform
           </span>
         </div>
       </div>
 
-      {/* Navigation Links */}
-      <nav style={{ padding: '1rem 0.75rem', flex: 1 }}>
+      {/* Navigation Scrollable Body */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '0.9rem 0.75rem' }}>
+        {/* Workspace Links Group */}
         <div style={{
-          fontSize: '0.72rem',
+          fontSize: '0.7rem',
           textTransform: 'uppercase',
           letterSpacing: '0.06em',
           color: 'var(--text-light)',
           fontWeight: 700,
-          padding: '0 0.5rem 0.5rem 0.5rem'
+          padding: '0 0.5rem 0.4rem 0.5rem'
         }}>
           Workspace
         </div>
 
-        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-          {navItems.map((item) => {
+        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.2rem', marginBottom: '1.25rem' }}>
+          {workspaceLinks.map((item) => {
             const isActive = currentView === item.view;
             return (
               <li key={item.view}>
@@ -105,10 +120,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     width: '100%',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '0.75rem',
-                    padding: '0.65rem 0.85rem',
+                    gap: '0.65rem',
+                    padding: '0.55rem 0.75rem',
                     borderRadius: 'var(--radius-md)',
-                    fontSize: '0.92rem',
+                    fontSize: '0.88rem',
                     fontWeight: isActive ? 600 : 500,
                     background: isActive ? 'var(--surface-sage)' : 'transparent',
                     color: isActive ? 'var(--primary-dark)' : 'var(--text-muted)',
@@ -126,54 +141,100 @@ export const Sidebar: React.FC<SidebarProps> = ({
             );
           })}
         </ul>
-      </nav>
+
+        {/* Explore & Discover Group */}
+        <div style={{
+          fontSize: '0.7rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.06em',
+          color: 'var(--text-light)',
+          fontWeight: 700,
+          padding: '0 0.5rem 0.4rem 0.5rem'
+        }}>
+          Explore &amp; Reference
+        </div>
+
+        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+          {exploreLinks.map((item) => {
+            const isActive = currentView === item.view;
+            return (
+              <li key={item.view}>
+                <button
+                  type="button"
+                  onClick={() => onNavigate(item.view)}
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.65rem',
+                    padding: '0.55rem 0.75rem',
+                    borderRadius: 'var(--radius-md)',
+                    fontSize: '0.88rem',
+                    fontWeight: isActive ? 600 : 500,
+                    background: isActive ? 'var(--surface-sage)' : 'transparent',
+                    color: isActive ? 'var(--primary-dark)' : 'var(--text-muted)',
+                    textAlign: 'left',
+                    transition: 'var(--transition)'
+                  }}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  <span style={{ color: isActive ? 'var(--primary)' : 'var(--text-light)' }}>
+                    {item.icon}
+                  </span>
+                  <span>{item.label}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
 
       {/* Active Plan Widget / CTA */}
       <div style={{
-        padding: '1rem',
+        padding: '0.85rem',
         borderTop: '1px solid var(--border-light)',
-        background: 'rgba(255, 255, 255, 0.6)'
+        background: 'rgba(255, 255, 255, 0.7)'
       }}>
         {activePlan ? (
           <div style={{
             background: 'var(--surface)',
             border: '1px solid var(--border-light)',
             borderRadius: 'var(--radius-md)',
-            padding: '0.85rem',
+            padding: '0.75rem',
             boxShadow: 'var(--shadow-sm)'
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
               <span style={{
-                fontSize: '0.72rem',
+                fontSize: '0.7rem',
                 fontWeight: 700,
                 color: 'var(--primary)',
                 textTransform: 'uppercase'
               }}>
                 Active Plan
               </span>
-              <span style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--primary-dark)' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--primary-dark)' }}>
                 {progressPercent}%
               </span>
             </div>
 
             <div style={{
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               fontWeight: 600,
               color: 'var(--text)',
               whiteSpace: 'nowrap',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
-              marginBottom: '0.5rem'
+              marginBottom: '0.45rem'
             }} title={activePlan.goal}>
               {activePlan.goal}
             </div>
 
             <div style={{
-              height: '5px',
+              height: '4px',
               background: 'var(--surface-sage)',
               borderRadius: '999px',
               overflow: 'hidden',
-              marginBottom: '0.65rem'
+              marginBottom: '0.55rem'
             }}>
               <div style={{
                 width: `${progressPercent}%`,
@@ -192,16 +253,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '0.35rem',
-                fontSize: '0.8rem',
+                fontSize: '0.78rem',
                 fontWeight: 600,
                 color: 'var(--primary)',
-                padding: '0.35rem',
+                padding: '0.3rem',
                 borderRadius: 'var(--radius-sm)',
                 background: 'var(--surface-sage-light)'
               }}
             >
-              <span>Today's Focus</span>
-              <ArrowRight size={13} />
+              <span>Today's Action</span>
+              <ArrowRight size={12} />
             </button>
           </div>
         ) : (
@@ -211,17 +272,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
             className="btn-primary"
             style={{
               width: '100%',
-              padding: '0.7rem',
-              fontSize: '0.88rem',
+              padding: '0.65rem',
+              fontSize: '0.85rem',
               borderRadius: 'var(--radius-md)'
             }}
           >
-            <PlusCircle size={16} />
-            <span>Create Plan</span>
+            <PlusCircle size={15} />
+            <span>Create 7-Day Plan</span>
           </button>
         )}
       </div>
     </aside>
   );
 };
-

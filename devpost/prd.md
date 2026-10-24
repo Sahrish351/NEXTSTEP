@@ -5,73 +5,88 @@ status: approved
 
 # NextStep — Product Requirements Document (PRD)
 
-A multi-view personal goal-execution workspace that turns overwhelming goals into actionable seven-day plans, providing daily focus, honest progress tracking, and complete plan management within the browser.
-Source: `scope.md > The Unique Kernel`, `scope.md > The Core Loop`, and `scope.md > The POC Boundary`.
+An art-directed, photo-enriched goal-execution and personal-growth platform that turns overwhelming ambitions into clear seven-day action plans, guiding users through daily execution, honest progress tracking, weekly reflection, and practical inspiration.
+Source: `scope.md > The Unique Kernel` and `scope.md > The 12 Distinct Destinations`.
 
-## The Core Journey
-1. **Public Landing Page:** Visitor sees value proposition, problem explanation, 4 domain use cases, plan preview, 3 benefits, and clicks "Create my plan".
-2. **Multi-Step Plan Wizard:**
-   - *Step 1: Goal Definition* — Validated input with character count, whitespace trimming.
-   - *Step 2: Category Selection* — Career, Study, Skill Building, Personal Project, Other.
-   - *Step 3: Plan Preview & Review* — User reviews the 7 proposed daily starter tasks before starting.
-   - *Step 4: Launch* — User starts plan, transitioning into the personal workspace.
-3. **Overview Dashboard:** Answers *"What do I do next?"* with:
-   - Today's Focus card (the next unfinished day or chosen day).
-   - Real-time progress percentage & completed ratio.
-   - 7-Day completion timeline dots.
-   - Upcoming tasks list.
-   - Genuine recent activity log (records real user actions).
-4. **My Plans View:**
-   - Active plan card with goal title, category badge, and creation date.
-   - Safe Goal Title Editor modal.
-   - Full 7-day task schedule stream with inline editing and toggling.
-   - Secondary "Delete plan" action with confirmation.
-5. **Today View:**
-   - Dedicated daily action view centered on one day.
-   - Day switcher navigation (Day 1 through Day 7).
-   - Task title, guidance description, inline edit mode, and completion toggle.
-   - Milestone banner when today's task is checked off.
-6. **Progress View:**
-   - Detailed completion analytics calculated from actual state.
-   - 7-Day interactive progress roadmap.
-   - Completed vs. remaining task list.
-   - 100% completion celebration banner.
-7. **Settings View:**
-   - Local browser data explanation.
-   - Working JSON Export: downloads `nextstep-plan.json`.
-   - Working JSON Import: uploads file, validates schema, asks for confirmation before replacing, and reloads.
-   - Reset plan action with destructive modal safeguard.
+## The 12 Destination Pages & Core Journeys
 
-## Surfaces and Layout
-- **Desktop Navigation:** Left sidebar featuring wordmark, primary navigation links (*Overview, My Plans, Today, Progress, Settings*), active goal pill, and quick "New Plan" action.
-- **Mobile Navigation:** Responsive header with view switcher or accessible bottom navigation bar with comfortable touch targets.
-- **Empty States:** When no plan exists, each view displays a helpful domain-specific empty state with a working "Create a plan" button.
+### Page 1: Public Home (`home`)
+- **Hero & Editorial Photography:** Large serif headline (*"Make your next step obvious"*), curated sunlit lifestyle imagery, primary CTA (*"Create my plan"*), secondary CTA (*"Explore goals"*).
+- **Interactive Plan Preview:** Interactive card showcasing Day 1–7 with real progress feedback.
+- **Problem & Solution:** Clear breakdown of how a 7-day starter sequence overcomes the intimidation of blank to-do lists.
+- **4 Visual Use Cases:** Highlighting *Study*, *Career*, *Skill Building*, and *Personal Projects* with real photography.
+- **Benefits & 3-Step Workflow:** Clean presentation of momentum, editable scaffolding, and zero-friction privacy.
 
-## Features and Functional Requirements
+### Page 2: Overview Dashboard (`overview`)
+- **Contextual Greeting & Active Goal Banner:** Overview of current objective.
+- **Today's Focus:** Identifies the first incomplete day with full instructions and direct completion toggle.
+- **7-Day Progress Strip:** Visual interactive day dots.
+- **Upcoming Tasks:** Sequential preview of next 2 pending days.
+- **Authentic Activity Feed:** Real event logs (creation, completion, edits).
 
-### FR-01: Public Landing Page
-Clean presentation with hero, 4 domain use cases (Career, Study, Skill, Project), benefits, interactive preview, and smooth navigation to wizard.
+### Page 3: My Plans (`plans`)
+- **Active Plan Summary:** Goal title, category badge, start date, and progress.
+- **Goal Title Editor:** Modal to update goal title with whitespace validation.
+- **Full 7-Day Schedule:** All 7 task cards with inline editing (Save/Cancel) and completion toggle.
+- **Safe Plan Deletion:** Confirmation dialog preventing accidental data loss.
 
-### FR-02: Multi-Step Goal Creation Wizard
-Step-by-step creation with back navigation, real-time input validation (1–120 characters), category selection, and proposed 7-day plan preview before starting.
+### Page 4: Today (`today`)
+- **Distraction-Free Action View:** Focuses solely on one day's task.
+- **Day Stepper (Day 1 to 7):** Easy navigation between days.
+- **Deep Guidance & Inline Editing:** Full instructions with option to edit.
+- **Celebratory Completion State:** Distinct feedback when today's task is checked off.
 
-### FR-03: Overview Dashboard
-Displays active goal, Today's Focus card (deterministic next incomplete task), 7-day completion timeline, upcoming tasks, and genuine recent activity log.
+### Page 5: Explore Goals (`explore`)
+- **Visual Discovery Gallery:** Categorized goal cards with lifestyle photography.
+- **Domain Categories:** Career, Study, Skill Building, Personal Projects, Other.
+- **Goal Prefill Action:** Clicking any example pre-populates the Plan Wizard with goal title and category.
+- **Search & Filter:** Functional filter bar by domain.
 
-### FR-04: Today View
-Dedicated daily focus view with Day 1–7 stepper, task instructions, inline edit, completion toggle, and celebratory completion message.
+### Page 6: Plan Builder (`builder`)
+- **4-Step Creation Flow:** 
+  1. Define Goal (with character count & inspiration pills)
+  2. Select Category (Career, Study, Skill Building, Personal Project, Other)
+  3. Plan Preview (review 7 generated starter tasks)
+  4. Launch Plan into Workspace.
 
-### FR-05: My Plans View & Goal Editing
-Comprehensive plan view with goal title editing modal, full 7-day task cards with inline editing, and deletion controls.
+### Page 7: Progress (`progress`)
+- **Honest Analytics:** Exact percentage and completed vs. remaining breakdown.
+- **7-Day Progress Tracker:** Visual milestone progression.
+- **100% Celebration:** Special celebratory banner when all 7 tasks are complete.
 
-### FR-06: Progress & Milestones
-Real-time calculated progress (0% to 100%), 7-day visual roadmap, completed/remaining breakdown, and 100% completion celebration.
+### Page 8: Weekly Reflection (`reflection`)
+- **Calming Writing Workflow:** Prompts for:
+  - *What went well this week?*
+  - *Which task was most challenging?*
+  - *What friction or blockers did you encounter?*
+  - *What will you adjust next time?*
+  - *What is your next single step?*
+- **Saved Reflection History:** Stores and displays saved reflections with timestamp.
 
-### FR-07: Settings, Export & Import
-Working JSON export downloading `nextstep-plan.json`. Working JSON import validating schema, prompting confirmation before overwrite, and restoring plan state. Safe plan reset.
+### Page 9: Inspiration Library (`inspiration`)
+- **Curated Goal Directory:** Rich library of practical goals with target audience, rationale, and suggested Day 1 first steps.
+- **One-Click Launch:** Direct CTA to build a plan from any library entry.
 
-### FR-08: Activity Logging
-Tracks real user events: `Plan created`, `Task marked complete`, `Task marked incomplete`, `Task edited`, `Goal updated`. No fake activity.
+### Page 10: Achievements (`achievements`)
+- **Genuine Milestone Badges:** Unlocked exclusively by real user actions:
+  - *First Step:* Create your first 7-day plan.
+  - *First Milestone:* Complete your Day 1 task.
+  - *Halfway There:* Complete 3 tasks.
+  - *Thoughtful Learner:* Save your first weekly reflection.
+  - *Finish Line:* Complete all 7 tasks.
+- Locked badges clearly explain how they are earned without artificial unlocks.
 
-### FR-09: Persistence & Safe Deletion
-Browser `localStorage` persistence across all routes, refresh recovery, corrupted data recovery, and focus-trapped deletion confirmation modal.
+### Page 11: Settings & Data (`settings`)
+- **Data Portability:** Download active plan and reflections as JSON (`nextstep-plan.json`).
+- **Validated JSON Import:** Validates schema and prompts confirmation before overwriting active data.
+- **Safe Workspace Reset:** Confirmation modal to wipe local storage safely.
+
+### Page 12: About NextStep (`about`)
+- **Editorial Storytelling:** The cognitive psychology of overcoming goal paralysis, why 7 days works, our design principles, privacy architecture, and open-source credits.
+
+---
+
+## Technical & Data Requirements
+- Centralized `Plan` object storing goal, category, tasks, activities, and reflections in `localStorage`.
+- Strict schema validation for data import.
+- Responsive across mobile (360px), tablet (768px), and desktop (1024px+).
