@@ -3,7 +3,7 @@ doc: checklist
 status: approved
 ---
 
-# Build Checklist
+# Build Checklist (Transformed Product Architecture)
 
 Build mode: fast
 
@@ -49,20 +49,20 @@ Build mode: fast
   Learner check: Refresh the browser with an active plan and verify the plan, task edits, and completed checks reload seamlessly.
   Commit: `feat: add local storage persistence and error-safe refresh recovery`
 
-- [x] **5. Safe plan deletion, confirmation dialog, and welcoming empty state**
-  Becomes usable: Users can safely delete their plan through an accessible confirmation modal, which permanently clears storage and transitions to an inviting empty state with a working "Create a new plan" button.
-  Why now: Completes the full application lifecycle and user journey boundary.
-  PRD ref: `prd.md > FR-09`, `prd.md > States and Boundaries > Empty State`
-  Spec ref: `spec.md > Components > ConfirmModal`, `spec.md > Components > EmptyState`
-  Build: Implement `ConfirmModal.tsx` with focus trapping, `Escape` key listener, "Keep my plan" / "Delete plan" actions, and `EmptyState.tsx` with a welcoming message and reset CTA.
-  Verify (mechanical): Run `npm run build`; verify modal cancel retains state; verify modal confirm clears localStorage and switches view to EmptyState.
-  Learner check: Click "Delete plan", click "Keep my plan" to verify nothing was deleted, click "Delete plan" again, confirm, and verify empty state appears.
-  Commit: `feat: add safe plan deletion modal and empty state`
+- [x] **5. Multi-View Workspace, Guided Creation Wizard & Data Portability**
+  Becomes usable: A complete multi-screen personal goal workspace with Overview, My Plans, Today, Progress, and Settings views, desktop sidebar and mobile bottom navigation, 3-step creation wizard with pre-launch plan preview, JSON export, and safe JSON import.
+  Why now: Transforms NextStep from a single page into an authentic, feature-rich productivity web application.
+  PRD ref: `prd.md > Surfaces and Layout`, `prd.md > FR-02` through `FR-08`
+  Spec ref: `spec.md > The Navigation & View Router`, `spec.md > View Modules`
+  Build: Implement `Sidebar.tsx`, `MobileNav.tsx`, `PlanWizard.tsx`, `EditGoalModal.tsx`, `OverviewView.tsx`, `MyPlansView.tsx`, `TodayView.tsx`, `ProgressView.tsx`, and `SettingsView.tsx` with activity logging and JSON file import/export.
+  Verify (mechanical): Run `npm run build` and `node tests-acceptance.mjs` verifying clean compilation and 100% test pass across all 8 acceptance categories.
+  Learner check: Navigate across Overview, My Plans, Today, Progress, and Settings. Test Today's focus toggle, test JSON export, and verify responsive layout on mobile.
+  Commit: `feat: complete multi-view workspace transformation`
 
 ## Hands-on Checkpoints
 
-- [x] Early usable behavior explored — Slice 1 verified: landing page, goal input, 5 categories, and 7-day starter plan generation
-- [x] Final kick-the-tires exploration and feedback completed — Full core journey, editing, progress, persistence, and deletion tested
+- [x] Early usable behavior explored — Multi-step wizard, category selection, and 7-day starter plan generation verified
+- [x] Final kick-the-tires exploration and feedback completed — Multi-view navigation (Overview, Plans, Today, Progress, Settings), JSON export/import, inline editing, and deletion tested
 
 ## Final Review
 
@@ -74,12 +74,15 @@ Build mode: fast
 - [x] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
 - [x] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
 
-Activity and evidence: Verified end-to-end user journey across all components (`LandingPage`, `GoalForm`, `PlanWorkspace`, `TaskCard`, `ProgressSummary`, `ConfirmModal`, `EmptyState`) and storage utilities.
-Route and stops: `src/App.tsx` (state coordination) → `src/components/GoalForm.tsx` (input validation) → `src/data/templates.ts` (category generation) → `src/components/TaskCard.tsx` (inline edit & toggle) → `src/utils/storage.ts` (localStorage persistence & recovery).
-Edit outcome: Clean production build verified with `npm run build` producing zero TypeScript errors.
-Reflection: Learner practiced translating real user needs through Scope → PRD → Technical Spec → Working Slices.
-Activity mode: Live application, headless verification suite (`tests-acceptance.mjs`), and comprehensive HTML interactive app map.
+Activity and evidence: Verified end-to-end multi-view architecture across all 5 workspace views (`OverviewView`, `MyPlansView`, `TodayView`, `ProgressView`, `SettingsView`), wizard flow (`PlanWizard`), responsive navigation (`Sidebar`, `MobileNav`, `Header`), and data engine (`storage.ts`).
+Route and stops: `src/App.tsx` (view coordinator) → `src/components/PlanWizard.tsx` (3-step creator) → `src/views/OverviewView.tsx` (today focus & activity) → `src/views/TodayView.tsx` (daily action mode) → `src/views/SettingsView.tsx` (JSON export/import).
+Edit outcome: Production build verified cleanly in 5.8s with zero errors (`npm run build`).
+Reflection: Practiced evolving a proof of concept from a single-screen prototype into a modular, multi-surface application while preserving core boundaries and zero-server privacy.
+Activity mode: Live application, headless automated test suite (`tests-acceptance.mjs`), and comprehensive interactive app map (`devpost/app-map.html`).
 
 ## Revisions
 
-
+- Added multi-view workspace architecture (`overview`, `plans`, `today`, `progress`, `settings`) to transform single-page prototype into a complete personal goal workspace.
+- Added 3-step creation wizard with plan preview to allow users to review the 7-day sequence before committing.
+- Added native JSON export and validated JSON import with overwrite safeguards for cross-browser data portability.
+- Added real activity logging (`activities` in `Plan`) to supply authentic recent history on the Overview dashboard without fake analytics.

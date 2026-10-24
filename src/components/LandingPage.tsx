@@ -1,16 +1,30 @@
 import React from 'react';
-import { ArrowDown, CheckCircle2, ShieldCheck, Sliders, CalendarDays } from 'lucide-react';
+import { 
+  ArrowRight, 
+  CheckCircle2, 
+  CalendarDays, 
+  BookOpen, 
+  Briefcase, 
+  Wrench, 
+  FolderKanban
+} from 'lucide-react';
 
 interface LandingPageProps {
-  onCreatePlanClick: () => void;
+  onOpenCreate: () => void;
+  hasActivePlan: boolean;
+  onGoToWorkspace: () => void;
 }
 
-export const LandingPage: React.FC<LandingPageProps> = ({ onCreatePlanClick }) => {
+export const LandingPage: React.FC<LandingPageProps> = ({
+  onOpenCreate,
+  hasActivePlan,
+  onGoToWorkspace,
+}) => {
   return (
-    <div style={{ paddingBottom: '3rem' }}>
+    <div style={{ paddingBottom: '3.5rem' }}>
       {/* Hero Section */}
       <section style={{
-        padding: '3.5rem 0 3rem 0',
+        padding: 'clamp(3rem, 6vw, 5rem) 0 3rem 0',
         textAlign: 'center',
       }}>
         <div className="content-wrapper">
@@ -27,16 +41,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onCreatePlanClick }) =
             marginBottom: '1.25rem'
           }}>
             <CalendarDays size={15} />
-            <span>7-Day Structured Action Plans</span>
+            <span>Structured Goal-Execution Workspace</span>
           </div>
 
           <h1 className="serif-heading" style={{
-            fontSize: 'clamp(2.4rem, 5vw, 3.8rem)',
+            fontSize: 'clamp(2.5rem, 5.5vw, 4.2rem)',
             color: 'var(--primary-dark)',
-            maxWidth: '820px',
+            maxWidth: '860px',
             margin: '0 auto 1.25rem auto',
             lineHeight: 1.15,
-            letterSpacing: '-0.02em'
+            letterSpacing: '-0.025em'
           }}>
             Make your next step obvious.
           </h1>
@@ -44,46 +58,55 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onCreatePlanClick }) =
           <p style={{
             fontSize: 'clamp(1.05rem, 2vw, 1.25rem)',
             color: 'var(--text-muted)',
-            maxWidth: '640px',
+            maxWidth: '660px',
             margin: '0 auto 2.25rem auto',
             lineHeight: 1.6
           }}>
             Turn one overwhelming goal into seven manageable daily actions. 
-            No blank screens, no complicated tools—just an organized, editable starting path to get you moving.
+            No blank screens, no complicated tools—just an organized, editable starting path to get you moving and keep you consistent.
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <button
-              onClick={onCreatePlanClick}
+              onClick={onOpenCreate}
               className="btn-primary"
               style={{ fontSize: '1.05rem', padding: '0.95rem 2rem' }}
             >
               <span>Create my plan</span>
-              <ArrowDown size={18} />
+              <ArrowRight size={18} />
             </button>
-            <a
-              href="#preview"
-              className="btn-secondary"
-              style={{ fontSize: '1rem', padding: '0.9rem 1.6rem' }}
-            >
-              See an example
-            </a>
+            {hasActivePlan ? (
+              <button
+                onClick={onGoToWorkspace}
+                className="btn-secondary"
+                style={{ fontSize: '1rem', padding: '0.9rem 1.6rem' }}
+              >
+                Go to my workspace →
+              </button>
+            ) : (
+              <a
+                href="#how-it-works"
+                className="btn-secondary"
+                style={{ fontSize: '1rem', padding: '0.9rem 1.6rem' }}
+              >
+                See how it works
+              </a>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Product Preview Mockup */}
-      <section id="preview" style={{ padding: '2rem 0 3.5rem 0' }}>
+      {/* Plan Preview Section */}
+      <section style={{ padding: '1rem 0 3.5rem 0' }}>
         <div className="content-wrapper">
           <div style={{
             background: 'var(--surface)',
             border: '1px solid var(--border)',
             borderRadius: 'var(--radius-lg)',
             boxShadow: 'var(--shadow-md)',
-            padding: 'clamp(1.5rem, 3vw, 2.25rem)',
-            maxWidth: '860px',
-            margin: '0 auto',
-            position: 'relative'
+            padding: 'clamp(1.5rem, 3.5vw, 2.5rem)',
+            maxWidth: '880px',
+            margin: '0 auto'
           }}>
             <div style={{
               display: 'flex',
@@ -96,16 +119,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onCreatePlanClick }) =
               gap: '0.75rem'
             }}>
               <div>
-                <span style={{
-                  fontSize: '0.75rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  color: 'var(--text-muted)',
-                  fontWeight: 600
-                }}>
-                  Interactive Preview • Career Goal
+                <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--primary)', fontWeight: 700 }}>
+                  Interactive Workspace Preview
                 </span>
-                <h3 className="serif-heading" style={{ fontSize: '1.5rem', color: 'var(--primary-dark)', marginTop: '0.2rem' }}>
+                <h3 className="serif-heading" style={{ fontSize: '1.6rem', color: 'var(--primary-dark)', marginTop: '0.2rem' }}>
                   Prepare for my web development interview
                 </h3>
               </div>
@@ -121,94 +138,77 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onCreatePlanClick }) =
               </span>
             </div>
 
-            {/* Preview Progress Bar */}
-            <div style={{ marginBottom: '1.75rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.4rem' }}>
-                <span style={{ fontWeight: 600, color: 'var(--primary-dark)' }}>2 of 7 completed (29%)</span>
-                <span style={{ color: 'var(--text-muted)' }}>5 days remaining</span>
+            {/* Progress Bar Preview */}
+            <div style={{ marginBottom: '1.5rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.45rem' }}>
+                <span style={{ fontWeight: 700, color: 'var(--primary-dark)' }}>2 of 7 completed (29%)</span>
+                <span style={{ color: 'var(--text-muted)' }}>Day 03 is your next focus</span>
               </div>
-              <div style={{
-                height: '8px',
-                background: 'var(--surface-sage)',
-                borderRadius: 'var(--radius-pill)',
-                overflow: 'hidden'
-              }}>
-                <div style={{
-                  width: '29%',
-                  height: '100%',
-                  background: 'var(--primary)',
-                  borderRadius: 'var(--radius-pill)'
-                }} />
+              <div style={{ height: '8px', background: 'var(--surface-sage)', borderRadius: '999px', overflow: 'hidden' }}>
+                <div style={{ width: '29%', height: '100%', background: 'var(--primary)', borderRadius: '999px' }} />
               </div>
             </div>
 
-            {/* Preview Tasks (3 items shown) */}
+            {/* Task Row Preview */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '1rem',
-                padding: '0.9rem 1.1rem',
+                gap: '0.85rem',
+                padding: '0.85rem 1rem',
                 background: 'var(--surface-sage-light)',
-                border: '1px solid var(--border-light)',
-                borderRadius: 'var(--radius-md)'
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--border-light)'
               }}>
                 <CheckCircle2 size={20} color="var(--primary)" />
                 <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary-dark)' }}>Day 01</span>
-                    <strong style={{ fontSize: '0.95rem', textDecoration: 'line-through', color: 'var(--text-muted)' }}>
-                      Analyze role requirements & target skills
-                    </strong>
-                  </div>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary-dark)', marginRight: '0.45rem' }}>Day 01</span>
+                  <strong style={{ fontSize: '0.92rem', color: 'var(--text-muted)', textDecoration: 'line-through' }}>
+                    Analyze role requirements & target skills
+                  </strong>
                 </div>
               </div>
 
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '1rem',
-                padding: '0.9rem 1.1rem',
+                gap: '0.85rem',
+                padding: '0.85rem 1rem',
                 background: 'var(--surface-sage-light)',
-                border: '1px solid var(--border-light)',
-                borderRadius: 'var(--radius-md)'
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--border-light)'
               }}>
                 <CheckCircle2 size={20} color="var(--primary)" />
                 <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary-dark)' }}>Day 02</span>
-                    <strong style={{ fontSize: '0.95rem', textDecoration: 'line-through', color: 'var(--text-muted)' }}>
-                      Master one foundational technical concept
-                    </strong>
-                  </div>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary-dark)', marginRight: '0.45rem' }}>Day 02</span>
+                  <strong style={{ fontSize: '0.92rem', color: 'var(--text-muted)', textDecoration: 'line-through' }}>
+                    Master one foundational technical concept
+                  </strong>
                 </div>
               </div>
 
               <div style={{
                 display: 'flex',
-                alignItems: 'center',
-                gap: '1rem',
-                padding: '0.9rem 1.1rem',
+                alignItems: 'flex-start',
+                gap: '0.85rem',
+                padding: '0.95rem 1rem',
                 background: 'var(--surface)',
-                border: '1px solid var(--border)',
-                borderRadius: 'var(--radius-md)'
+                borderRadius: 'var(--radius-md)',
+                border: '1.5px solid var(--primary)',
+                boxShadow: 'var(--shadow-sm)'
               }}>
-                <div style={{
-                  width: '20px',
-                  height: '20px',
-                  borderRadius: '4px',
-                  border: '2px solid var(--border)',
-                  background: 'var(--surface)'
-                }} />
+                <div style={{ width: '20px', height: '20px', borderRadius: '4px', border: '2px solid var(--primary)', marginTop: '0.15rem' }} />
                 <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary)' }}>Day 03</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary)', background: 'var(--surface-sage)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>
+                      Day 03 • Today's Focus
+                    </span>
                     <strong style={{ fontSize: '0.95rem', color: 'var(--text)' }}>
                       Solve one targeted hands-on challenge
                     </strong>
                   </div>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
-                    Complete one code challenge or technical scenario relevant to the job.
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                    Complete one small code challenge or technical scenario relevant to the role.
                   </p>
                 </div>
               </div>
@@ -217,104 +217,64 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onCreatePlanClick }) =
         </div>
       </section>
 
-      {/* 3 Core Benefits */}
-      <section style={{ padding: '3rem 0', background: 'rgba(220, 235, 225, 0.35)', borderTop: '1px solid var(--border-light)', borderBottom: '1px solid var(--border-light)' }}>
+      {/* The Core Problem & 4 Real Use Cases */}
+      <section style={{ padding: '3.5rem 0', background: 'rgba(220, 235, 225, 0.35)', borderTop: '1px solid var(--border-light)', borderBottom: '1px solid var(--border-light)' }}>
         <div className="content-wrapper">
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <h2 className="serif-heading" style={{ fontSize: '2.1rem', color: 'var(--primary-dark)', marginBottom: '0.5rem' }}>
-              Why a 7-day starting path works
+            <h2 className="serif-heading" style={{ fontSize: '2.2rem', color: 'var(--primary-dark)', marginBottom: '0.5rem' }}>
+              Built for Four Tangible Ambitions
             </h2>
-            <p style={{ color: 'var(--text-muted)', maxWidth: '580px', margin: '0 auto' }}>
-              NextStep is engineered to defeat procrastination through immediate, practical structure.
+            <p style={{ color: 'var(--text-muted)', maxWidth: '580px', margin: '0 auto', fontSize: '1rem' }}>
+              NextStep replaces the paralysis of a blank page with structured daily execution.
             </p>
           </div>
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.5rem'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: '1.25rem'
           }}>
-            <div style={{
-              background: 'var(--surface)',
-              border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-md)',
-              padding: '1.75rem',
-              boxShadow: 'var(--shadow-sm)'
-            }}>
-              <div style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '8px',
-                background: 'var(--surface-sage)',
-                color: 'var(--primary)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1rem'
-              }}>
-                <CheckCircle2 size={22} />
+            {/* Use Case 1 */}
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '1.5rem', boxShadow: 'var(--shadow-sm)' }}>
+              <div style={{ width: '38px', height: '38px', borderRadius: '8px', background: 'var(--surface-sage)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.85rem' }}>
+                <Briefcase size={20} />
               </div>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: 'var(--primary-dark)' }}>
-                Instant Cognitive Relief
-              </h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: 1.55 }}>
-                Instead of staring at a blank screen wondering what to do first, receive seven logically sequenced daily actions the moment you type your goal.
+              <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', marginBottom: '0.35rem' }}>Job Seekers</h3>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                Break daunting interview prep into 7 sequenced days: job analysis, technical drills, STAR stories, and timed mock sessions.
               </p>
             </div>
 
-            <div style={{
-              background: 'var(--surface)',
-              border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-md)',
-              padding: '1.75rem',
-              boxShadow: 'var(--shadow-sm)'
-            }}>
-              <div style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '8px',
-                background: 'var(--surface-sage)',
-                color: 'var(--primary)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1rem'
-              }}>
-                <Sliders size={22} />
+            {/* Use Case 2 */}
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '1.5rem', boxShadow: 'var(--shadow-sm)' }}>
+              <div style={{ width: '38px', height: '38px', borderRadius: '8px', background: 'var(--surface-sage)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.85rem' }}>
+                <BookOpen size={20} />
               </div>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: 'var(--primary-dark)' }}>
-                Editable Starter Scaffolding
-              </h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: 1.55 }}>
-                Our templates provide honest, realistic momentum. Customize any task title or description to match your exact circumstances anytime.
+              <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', marginBottom: '0.35rem' }}>Students</h3>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                Conquer upcoming exams by dividing syllabus topics into daily active-recall notes, practice questions, and past paper reviews.
               </p>
             </div>
 
-            <div style={{
-              background: 'var(--surface)',
-              border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-md)',
-              padding: '1.75rem',
-              boxShadow: 'var(--shadow-sm)'
-            }}>
-              <div style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '8px',
-                background: 'var(--surface-sage)',
-                color: 'var(--primary)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1rem'
-              }}>
-                <ShieldCheck size={22} />
+            {/* Use Case 3 */}
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '1.5rem', boxShadow: 'var(--shadow-sm)' }}>
+              <div style={{ width: '38px', height: '38px', borderRadius: '8px', background: 'var(--surface-sage)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.85rem' }}>
+                <Wrench size={20} />
               </div>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: 'var(--primary-dark)' }}>
-                Private &amp; Zero Friction
-              </h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: 1.55 }}>
-                No sign-ups, no passwords, and no server tracking. Your plans stay safely stored in your browser so you can refresh or return whenever you wish.
+              <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', marginBottom: '0.35rem' }}>Skill Learners</h3>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                Master a new tool or programming language through progressive daily milestones from setup to standalone micro-projects.
+              </p>
+            </div>
+
+            {/* Use Case 4 */}
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '1.5rem', boxShadow: 'var(--shadow-sm)' }}>
+              <div style={{ width: '38px', height: '38px', borderRadius: '8px', background: 'var(--surface-sage)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.85rem' }}>
+                <FolderKanban size={20} />
+              </div>
+              <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', marginBottom: '0.35rem' }}>Builders &amp; Creators</h3>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                Turn ambitious side projects into realistic 7-day runways: scope definition, wireframes, core implementation, polish, and demo.
               </p>
             </div>
           </div>
@@ -326,7 +286,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onCreatePlanClick }) =
         <div className="content-wrapper">
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <h2 className="serif-heading" style={{ fontSize: '2.1rem', color: 'var(--primary-dark)', marginBottom: '0.5rem' }}>
-              How it works
+              How NextStep works
             </h2>
             <p style={{ color: 'var(--text-muted)', maxWidth: '540px', margin: '0 auto' }}>
               Three straightforward steps from initial ambition to tangible daily accomplishment.
@@ -340,12 +300,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onCreatePlanClick }) =
           }}>
             <div style={{ textAlign: 'center', padding: '1rem' }}>
               <div style={{
-                width: '48px',
-                height: '48px',
+                width: '46px',
+                height: '46px',
                 borderRadius: '50%',
                 background: 'var(--primary)',
                 color: '#FFFFFF',
-                fontSize: '1.2rem',
+                fontSize: '1.15rem',
                 fontWeight: 700,
                 display: 'flex',
                 alignItems: 'center',
@@ -356,18 +316,18 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onCreatePlanClick }) =
               </div>
               <h3 style={{ fontSize: '1.15rem', marginBottom: '0.4rem', color: 'var(--text)' }}>1. Name your goal</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: 1.5 }}>
-                Enter what you want to achieve and choose a category (Study, Career, Skill Building, Personal Project, or Other).
+                Enter what you want to achieve and choose a category. Preview your generated 7-day sequence before launching.
               </p>
             </div>
 
             <div style={{ textAlign: 'center', padding: '1rem' }}>
               <div style={{
-                width: '48px',
-                height: '48px',
+                width: '46px',
+                height: '46px',
                 borderRadius: '50%',
                 background: 'var(--primary)',
                 color: '#FFFFFF',
-                fontSize: '1.2rem',
+                fontSize: '1.15rem',
                 fontWeight: 700,
                 display: 'flex',
                 alignItems: 'center',
@@ -376,20 +336,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onCreatePlanClick }) =
               }}>
                 2
               </div>
-              <h3 style={{ fontSize: '1.15rem', marginBottom: '0.4rem', color: 'var(--text)' }}>2. Review 7 sequential steps</h3>
+              <h3 style={{ fontSize: '1.15rem', marginBottom: '0.4rem', color: 'var(--text)' }}>2. Review &amp; personalize</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: 1.5 }}>
-                Receive an immediate progression from foundational research to active practice and review. Edit any task to fit.
+                Receive structured daily actions. Edit any task title or instructions to match your personal circumstances.
               </p>
             </div>
 
             <div style={{ textAlign: 'center', padding: '1rem' }}>
               <div style={{
-                width: '48px',
-                height: '48px',
+                width: '46px',
+                height: '46px',
                 borderRadius: '50%',
                 background: 'var(--primary)',
                 color: '#FFFFFF',
-                fontSize: '1.2rem',
+                fontSize: '1.15rem',
                 fontWeight: 700,
                 display: 'flex',
                 alignItems: 'center',
@@ -398,15 +358,51 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onCreatePlanClick }) =
               }}>
                 3
               </div>
-              <h3 style={{ fontSize: '1.15rem', marginBottom: '0.4rem', color: 'var(--text)' }}>3. Check off daily momentum</h3>
+              <h3 style={{ fontSize: '1.15rem', marginBottom: '0.4rem', color: 'var(--text)' }}>3. Execute day by day</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: 1.5 }}>
-                Check off tasks as you finish them each day. Watch your progress percentage rise and return anytime.
+                Use Today View for focused single-action clarity. Check off tasks and watch your progress update in real time.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final Call to Action */}
+      <section style={{ padding: '2.5rem 0' }}>
+        <div className="content-wrapper">
+          <div style={{
+            background: 'var(--primary)',
+            color: '#FFFFFF',
+            borderRadius: 'var(--radius-lg)',
+            padding: 'clamp(2rem, 5vw, 3.5rem)',
+            textAlign: 'center',
+            boxShadow: 'var(--shadow-md)'
+          }}>
+            <h2 className="serif-heading" style={{ fontSize: 'clamp(2rem, 4vw, 2.7rem)', color: '#FFFFFF', marginBottom: '0.85rem' }}>
+              Ready to take your next step?
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.05rem', maxWidth: '580px', margin: '0 auto 2rem auto', lineHeight: 1.6 }}>
+              No sign-ups, no passwords, and no fees. Start your 7-day action plan now and keep your momentum in your browser.
+            </p>
+            <button
+              onClick={onOpenCreate}
+              style={{
+                background: 'var(--bg)',
+                color: 'var(--primary-dark)',
+                fontWeight: 700,
+                fontSize: '1.05rem',
+                padding: '0.9rem 2.2rem',
+                borderRadius: 'var(--radius-pill)',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 4px 14px rgba(0,0,0,0.15)'
+              }}
+            >
+              Build My 7-Day Plan
+            </button>
           </div>
         </div>
       </section>
     </div>
   );
 };
-

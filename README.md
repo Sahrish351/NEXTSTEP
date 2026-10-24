@@ -1,6 +1,6 @@
 # NextStep — Make your next step obvious
 
-> A focused, responsive web application that turns any overwhelming personal or professional goal into an immediate, editable seven-day action plan with browser-persisted progress tracking.
+> A comprehensive personal goal-execution workspace that turns overwhelming goals into actionable seven-day plans, providing daily focus, honest progress tracking, and complete plan management within the browser.
 
 Built for the **Devpost Build with AI: Basics** hackathon following the official plan-first workflow (Scope, PRD, Technical Spec, Slices, and Verification).
 
@@ -23,27 +23,39 @@ NextStep eliminates that initial friction. Instead of asking you to organize eve
 
 ---
 
-## ✨ Features That Actually Work
+## 🧭 Multi-View Workspace Navigation
 
-- **Responsive Landing Page:** Clear value proposition, interactive visual preview of a real 7-day plan, 3-pillar benefit breakdown, and a smooth-scrolling call to action.
-- **Goal Input with Validation:** Validates goal text (up to 120 characters), trims whitespace, and rejects blank submissions with friendly inline alerts.
-- **5 Domain Categories:** Instant starter task mapping for:
-  - *Career & Jobs*
-  - *Study & Exams*
-  - *Skill Building*
-  - *Personal Project*
-  - *Other Goal*
-- **7-Day Sequential Starter Tasks:** Generates seven distinct, logically progressive starter tasks guiding the user from initial orientation through focused execution to synthesis and review.
-- **Inline Task Editing:** Edit any task's title and description directly inside its card with Save and Cancel safeguards. Empty titles are prevented and whitespace is trimmed automatically.
+NextStep features a complete multi-view workspace with responsive desktop sidebar and mobile navigation:
+
+1. **Overview Dashboard:** Answers *"What do I do next?"* with Today's Focus, upcoming tasks, real-time progress, and authentic recent activity logs.
+2. **My Plans:** Complete active plan management, full 7-day schedule with inline editing, safe goal title editor, and plan deletion.
+3. **Today View:** A dedicated single-day focus mode with Day 1–7 stepper navigation, task instructions, inline editing, and celebratory feedback.
+4. **Progress View:** Transparent completion metrics, 7-day visual roadmap, completed vs. remaining breakdown, and a 100% milestone celebration banner.
+5. **Settings View:** Browser data management, native JSON plan export, validated JSON plan import with overwrite confirmation, and safe plan reset.
+6. **Public Landing Page:** High-impact hero, problem breakdown, 4 domain use cases (Career, Study, Skill, Project), benefits, interactive plan preview, and smooth navigation to the plan creator.
+
+---
+
+## ✨ Core Features & Technical Highlights
+
+- **3-Step Guided Plan Wizard:**
+  - *Step 1: Goal Definition* with character counter (max 120 chars) and whitespace trimming.
+  - *Step 2: Category Selection* across 5 structured domains (*Career, Study, Skill Building, Personal Project, Other*).
+  - *Step 3: Plan Preview & Review* allowing users to inspect all 7 proposed daily actions before launching.
+- **Deterministic Today Focus:** Automatically calculates the next incomplete task in the 7-day sequence and highlights it as Today's Focus.
+- **Authentic Activity Logging:** Tracks genuine user actions (plan created, task completed/uncompleted, task edited, goal updated) without fake analytics.
+- **Inline Task Card Editing:** Edit any task's title and description directly inside its card with Save and Cancel safeguards. Empty titles are prevented and whitespace is trimmed automatically.
 - **Two-Way Completion Toggling:** Mark tasks complete and incomplete with clear visual checkmark states and card styling that does not rely on color alone.
-- **Accurate Real-Time Progress:** Dynamic progress bar and counter calculated directly from state (e.g., `2 of 7 completed (29%)`).
-- **Browser LocalStorage Persistence:** Plans, custom edits, and completed states are automatically preserved in `localStorage`. Refreshing or reopening the app restores your plan immediately.
-- **Safe Plan Deletion & Empty State:** A dedicated "Delete plan" action protected by an accessible confirmation dialog. Deleting clears local storage and reveals a welcoming empty state with a "Create a new plan" button.
+- **Data Portability (Export & Import):**
+  - *Export:* Download active plan as a clean JSON file (`nextstep-plan.json`).
+  - *Import:* Upload plan files with schema validation and confirmation before replacing an active plan.
+- **Browser LocalStorage Persistence:** Plans, custom edits, activity history, and completed states are automatically preserved in `localStorage`. Refreshing or reopening the app restores your workspace immediately.
+- **Safe Plan Deletion & Reset:** Protected by an accessible confirmation modal with focus trapping.
 - **Graceful Error Recovery:** Detects and handles corrupted browser storage without crashing, offering a safe one-click reset.
 
 ---
 
-## 💡 How the 7-Day Plan Works & Starter Template Transparency
+## 💡 Starter Template Transparency & Honesty
 
 NextStep's MVP uses transparent, editable, category-based starter templates. 
 
@@ -52,11 +64,11 @@ NextStep's MVP uses transparent, editable, category-based starter templates.
 
 ---
 
-## 🔒 Privacy & Local Storage Limitation
+## 🔒 Privacy & Local Storage Architecture
 
 NextStep stores your goals, customized tasks, and completion checkmarks exclusively in your current browser's `localStorage`:
 - **Private:** No passwords, accounts, or tracking cookies. No data ever leaves your device.
-- **Limitation:** Because data is stored in the local browser, your plan will not automatically sync across different browsers or devices. Clearing your browser's site data will delete your saved plan.
+- **Limitation:** Because data is stored in the local browser, your plan will not automatically sync across different browsers or devices. Use the **Export Plan** feature in Settings to backup or transfer your plan to another browser.
 
 ---
 
@@ -66,7 +78,7 @@ NextStep stores your goals, customized tasks, and completion checkmarks exclusiv
 - **Language:** [TypeScript](https://www.typescriptlang.org/) (Strict mode)
 - **Build Tool:** [Vite](https://vitejs.dev/)
 - **Icons:** [lucide-react](https://lucide.dev/)
-- **Persistence:** Browser Web Storage API (`localStorage`)
+- **Persistence:** Browser Web Storage API (`localStorage`) + HTML5 File API
 - **Typography:** DM Serif Display & DM Sans (via Google Fonts with system fallbacks)
 
 ---
@@ -96,7 +108,12 @@ NextStep stores your goals, customized tasks, and completion checkmarks exclusiv
    ```
    Open your browser at `http://localhost:5173`.
 
-4. **Build and test for production:**
+4. **Run automated acceptance tests:**
+   ```bash
+   node tests-acceptance.mjs
+   ```
+
+5. **Build for production:**
    ```bash
    npm run build
    npm run preview
@@ -104,28 +121,30 @@ NextStep stores your goals, customized tasks, and completion checkmarks exclusiv
 
 ---
 
-## 🧪 Manual Testing & Verification Guide
+## 🧪 Comprehensive Testing Guide
 
-| Step | Action | Expected Result |
+| Feature | Action | Expected Result |
 | :--- | :--- | :--- |
-| **1. Empty Goal Validation** | Submit empty goal in creator form | Form alerts *"Please enter a goal so we can build your plan"* and prevents creation. |
-| **2. 7-Day Generation** | Enter *"Prepare for my web development interview"*, select *Career*, click build | Renders workspace with active goal, *Career* badge, 0% progress, and 7 sequential tasks. |
-| **3. Inline Edit & Save** | Click *Edit* on Day 3, change title, click *Save* | Card updates immediately with new text. |
-| **4. Inline Edit & Cancel** | Click *Edit* on Day 4, change text, click *Cancel* | Previous text is preserved without changes. |
-| **5. Task Completion** | Click checkbox on Day 1 and Day 2 | Cards show checked state; progress bar updates to `2 of 7 completed (29%)`. |
-| **6. Persistence on Refresh** | Refresh the browser (`F5` or `Ctrl+R`) | Saved plan, edited Day 3, and checked Day 1 & 2 reload immediately. |
-| **7. Delete Confirmation** | Click *Delete plan*, click *Keep my plan* | Modal closes; plan remains completely intact. |
-| **8. Confirmed Deletion** | Click *Delete plan*, click *Delete plan* button | Modal closes; workspace resets to empty state with *"Ready for your next step?"*. |
-| **9. New Plan Flow** | Click *Create a new plan* in empty state | Reopens creator form ready for a new goal. |
+| **1. Goal Validation** | Submit empty goal in Wizard Step 1 | Alerts *"Please enter a goal so we can build your plan"* and blocks Next. |
+| **2. 3-Step Wizard** | Enter goal, choose Career, review 7 tasks | Step 3 displays all 7 tasks; clicking "Start" opens Overview. |
+| **3. Overview Dashboard** | View Overview | Shows Today's Focus (Day 1), progress bar, upcoming tasks, and recent activity. |
+| **4. Today View** | Navigate to Today, click "Mark Task as Done" | Card updates to completed with celebratory banner; stepper shows checkmark. |
+| **5. Task Inline Edit** | Navigate to My Plans, edit Day 3 title, save | Day 3 updates immediately; activity log records edit. |
+| **6. Goal Title Edit** | In My Plans, click "Edit Goal", change text, save | Goal title updates across all views and sidebar. |
+| **7. Progress View** | Navigate to Progress | Displays completion percentage, 7-day tracker, and completed/remaining list. |
+| **8. JSON Export** | In Settings, click "Export Active Plan" | Browser downloads `nextstep_plan_[goal].json`. |
+| **9. JSON Import** | In Settings, upload plan JSON | Validates schema, prompts confirmation to overwrite, and loads imported plan. |
+| **10. Persistence on Refresh** | Refresh browser (`F5`) | Preserves active plan, task edits, completion checks, and activity stream. |
+| **11. Plan Deletion** | In Settings or My Plans, click "Reset / Delete" | Opens modal; confirming clears plan and returns to clean landing page. |
 
 ---
 
 ## 📋 Devpost Learn Planning Documents
 
-As required by the official Devpost Learn curriculum, all approved planning artifacts are maintained directly in the `devpost/` folder:
+All approved planning artifacts are maintained directly in the `devpost/` folder:
 - [`devpost/scope.md`](./devpost/scope.md) & [`devpost/scope-review.html`](./devpost/scope-review.html) — Approved project scope, core kernel, and proof-of-concept boundaries.
-- [`devpost/prd.md`](./devpost/prd.md) & [`devpost/prd.html`](./devpost/prd.html) — Approved product requirements, core journey, and UX specifications.
-- [`devpost/spec.md`](./devpost/spec.md) & [`devpost/spec.html`](./devpost/spec.html) — Approved technical architecture, data model, component mapping, and failure modes.
+- [`devpost/prd.md`](./devpost/prd.md) & [`devpost/prd.html`](./devpost/prd.html) — Approved product requirements, multi-view journey, and UX specifications.
+- [`devpost/spec.md`](./devpost/spec.md) & [`devpost/spec.html`](./devpost/spec.html) — Technical architecture, TypeScript models, component hierarchy, and failure modes.
 - [`devpost/checklist.md`](./devpost/checklist.md) — Ordered build slices with mechanical verifications and commits.
 - [`devpost/app-map.html`](./devpost/app-map.html) — Interactive architecture map and code tour.
 
@@ -142,4 +161,3 @@ As required by the official Devpost Learn curriculum, all approved planning arti
 ## 📄 License
 
 This project is open source and available under the [MIT License](./LICENSE).
-

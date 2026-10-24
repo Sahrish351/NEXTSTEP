@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NextStep — Application Map &amp; Architecture Tour</title>
+  <title>NextStep — Transformed Application Map &amp; Architecture Tour</title>
   <style>
     :root {
       --bg: #FAF8F3;
@@ -30,7 +30,7 @@
     }
 
     .container {
-      max-width: 920px;
+      max-width: 940px;
       margin: 0 auto;
     }
 
@@ -74,12 +74,6 @@
       margin-bottom: 0.85rem;
     }
 
-    h3 {
-      font-size: 1.1rem;
-      color: var(--primary-dark);
-      margin: 1rem 0 0.35rem 0;
-    }
-
     .file-pill {
       font-family: monospace;
       font-size: 0.85rem;
@@ -112,52 +106,74 @@
       border-radius: 0 8px 8px 0;
       margin-top: 1.5rem;
     }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 680px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <span class="badge">App Map &amp; Code Architecture</span>
-      <h1>NextStep — Codebase Navigation Tour</h1>
+      <span class="badge">Multi-View Architecture Map</span>
+      <h1>NextStep — Goal Execution Workspace Tour</h1>
       <p style="color: var(--text-muted); font-size: 1.05rem;">
-        An interactive guide to how components, state, and browser storage work together.
+        Complete breakdown of the transformed 5-view personal goal-execution workspace.
       </p>
     </header>
 
     <div class="card">
-      <h2>Component Flow &amp; Data Journey</h2>
+      <h2>Transformed Multi-View Architecture</h2>
       <div class="diagram-container">
-        <svg class="diagram-svg" viewBox="0 0 760 220" width="760" height="220" xmlns="http://www.w3.org/2000/svg">
-          <!-- App.tsx Container -->
-          <rect x="20" y="20" width="720" height="180" rx="12" fill="#FAF8F3" stroke="#246B52" stroke-width="2" stroke-dasharray="5,5"/>
-          <text x="40" y="45" font-family="sans-serif" font-size="12" font-weight="bold" fill="#194C3A">App.tsx (Root State Coordinator)</text>
+        <svg class="diagram-svg" viewBox="0 0 780 230" width="780" height="230" xmlns="http://www.w3.org/2000/svg">
+          <!-- Root Router -->
+          <rect x="20" y="20" width="160" height="190" rx="10" fill="#FAF8F3" stroke="#246B52" stroke-width="2"/>
+          <text x="100" y="45" font-family="sans-serif" font-size="12" font-weight="bold" fill="#194C3A" text-anchor="middle">Root Router (App.tsx)</text>
+          <text x="100" y="70" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">• Navigation State</text>
+          <text x="100" y="90" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">• Active Plan State</text>
+          <text x="100" y="110" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">• Activity Logger</text>
+          <text x="100" y="140" font-family="sans-serif" font-size="10" font-weight="bold" fill="#246B52" text-anchor="middle">&lt;PlanWizard /&gt;</text>
+          <text x="100" y="160" font-family="sans-serif" font-size="10" font-weight="bold" fill="#246B52" text-anchor="middle">&lt;ConfirmModal /&gt;</text>
+          <text x="100" y="180" font-family="sans-serif" font-size="10" font-weight="bold" fill="#246B52" text-anchor="middle">&lt;Sidebar /&gt; / &lt;MobileNav /&gt;</text>
 
-          <!-- Landing Surface -->
-          <rect x="40" y="60" width="190" height="120" rx="8" fill="#FFFFFF" stroke="#E2DDD5" stroke-width="1.5"/>
-          <text x="135" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#246B52" text-anchor="middle">Surface 1: Arrival</text>
-          <text x="135" y="110" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">&lt;LandingPage /&gt;</text>
-          <text x="135" y="130" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">&lt;GoalForm /&gt;</text>
-          <text x="135" y="155" font-family="sans-serif" font-size="9" fill="#194C3A" font-weight="bold" text-anchor="middle">Input → 5 Categories</text>
+          <!-- Branch Arrows -->
+          <path d="M 180 115 L 230 115" stroke="#246B52" stroke-width="2"/>
 
-          <!-- Transition 1 -->
-          <path d="M 230 120 L 275 120" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+          <!-- Workspace Views -->
+          <rect x="230" y="20" width="350" height="190" rx="10" fill="#DCEBE1" stroke="#246B52" stroke-width="2"/>
+          <text x="405" y="45" font-family="sans-serif" font-size="13" font-weight="bold" fill="#194C3A" text-anchor="middle">5 Dedicated Workspace Views</text>
+          
+          <rect x="245" y="60" width="150" height="32" rx="6" fill="#FFFFFF" stroke="#246B52"/>
+          <text x="320" y="80" font-family="sans-serif" font-size="11" font-weight="bold" fill="#246B52" text-anchor="middle">1. &lt;OverviewView /&gt;</text>
 
-          <!-- Generator -->
-          <rect x="275" y="80" width="140" height="80" rx="8" fill="#DCEBE1" stroke="#246B52" stroke-width="1.5"/>
-          <text x="345" y="105" font-family="sans-serif" font-size="11" font-weight="bold" fill="#194C3A" text-anchor="middle">templates.ts</text>
-          <text x="345" y="125" font-family="sans-serif" font-size="10" fill="#194C3A" text-anchor="middle">generateTasksForGoal()</text>
-          <text x="345" y="145" font-family="sans-serif" font-size="9" fill="#556358" text-anchor="middle">7 Sequential Tasks</text>
+          <rect x="410" y="60" width="155" height="32" rx="6" fill="#FFFFFF" stroke="#246B52"/>
+          <text x="487" y="80" font-family="sans-serif" font-size="11" font-weight="bold" fill="#246B52" text-anchor="middle">2. &lt;MyPlansView /&gt;</text>
 
-          <!-- Transition 2 -->
-          <path d="M 415 120 L 460 120" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+          <rect x="245" y="105" width="150" height="32" rx="6" fill="#FFFFFF" stroke="#246B52"/>
+          <text x="320" y="125" font-family="sans-serif" font-size="11" font-weight="bold" fill="#246B52" text-anchor="middle">3. &lt;TodayView /&gt;</text>
 
-          <!-- Workspace Surface -->
-          <rect x="460" y="60" width="260" height="120" rx="8" fill="#FFFFFF" stroke="#246B52" stroke-width="2"/>
-          <text x="590" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#194C3A" text-anchor="middle">Surface 2: Workspace</text>
-          <text x="590" y="105" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">&lt;ProgressSummary /&gt; (Realtime %)</text>
-          <text x="590" y="125" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">&lt;TaskCard /&gt; (7 cards with inline edit)</text>
-          <text x="590" y="145" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">&lt;ConfirmModal /&gt; (Safe delete)</text>
-          <text x="590" y="165" font-family="sans-serif" font-size="9" fill="#246B52" font-weight="bold" text-anchor="middle">storage.ts ↔ localStorage</text>
+          <rect x="410" y="105" width="155" height="32" rx="6" fill="#FFFFFF" stroke="#246B52"/>
+          <text x="487" y="125" font-family="sans-serif" font-size="11" font-weight="bold" fill="#246B52" text-anchor="middle">4. &lt;ProgressView /&gt;</text>
+
+          <rect x="325" y="150" width="160" height="32" rx="6" fill="#FFFFFF" stroke="#246B52"/>
+          <text x="405" y="170" font-family="sans-serif" font-size="11" font-weight="bold" fill="#246B52" text-anchor="middle">5. &lt;SettingsView /&gt;</text>
+
+          <!-- Branch to Storage -->
+          <path d="M 580 115 L 620 115" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Storage Guard -->
+          <rect x="620" y="45" width="140" height="140" rx="10" fill="#FAF8F3" stroke="#246B52" stroke-width="2"/>
+          <text x="690" y="70" font-family="sans-serif" font-size="12" font-weight="bold" fill="#194C3A" text-anchor="middle">Storage Engine</text>
+          <text x="690" y="95" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">localStorage</text>
+          <text x="690" y="115" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">JSON Export</text>
+          <text x="690" y="135" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">JSON Import</text>
+          <text x="690" y="155" font-family="sans-serif" font-size="9" fill="#246B52" font-weight="bold" text-anchor="middle">Zero Server Overhead</text>
 
           <defs>
             <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -169,36 +185,37 @@
     </div>
 
     <div class="card">
-      <h2>File Navigation Index</h2>
-      <ul>
-        <li>
-          <span class="file-pill">src/App.tsx</span>: The single source of truth. Owns the active plan state, handles navigation transitions, connects actions to storage, and controls the deletion confirmation modal.
-        </li>
-        <li>
-          <span class="file-pill">src/data/templates.ts</span>: Holds the 5 domain template banks (Career, Study, Skill Building, Personal Project, Other). Returns seven structured daily tasks when given a category.
-        </li>
-        <li>
-          <span class="file-pill">src/utils/storage.ts</span>: Manages reading and writing to browser <code>localStorage</code>. Includes strict schema validation so corrupted data won't crash the UI.
-        </li>
-        <li>
-          <span class="file-pill">src/components/TaskCard.tsx</span>: Handles both view mode and inline editing mode with Save and Cancel safeguards. Emits changes cleanly back to <code>App.tsx</code>.
-        </li>
-        <li>
-          <span class="file-pill">src/components/ProgressSummary.tsx</span>: Computes the exact percentage and completed count dynamically with accessible ARIA progress bar tags.
-        </li>
-        <li>
-          <span class="file-pill">src/components/ConfirmModal.tsx</span>: Traps focus and listens for the <code>Escape</code> key to prevent accidental plan deletion.
-        </li>
-      </ul>
+      <h2>Component Directory &amp; Roles</h2>
+      <div class="grid-2">
+        <div>
+          <h3>Workspace Views:</h3>
+          <ul style="padding-left: 1.25rem; font-size: 0.92rem; line-height: 1.6;">
+            <li><span class="file-pill">src/views/OverviewView.tsx</span>: Today's focus card, 7-day timeline dots, upcoming steps, and authentic activity stream.</li>
+            <li><span class="file-pill">src/views/MyPlansView.tsx</span>: Active plan header, goal editing modal trigger, and full 7-day task schedule stream.</li>
+            <li><span class="file-pill">src/views/TodayView.tsx</span>: Dedicated single-day execution mode with Day 1–7 stepper and inline task editing.</li>
+            <li><span class="file-pill">src/views/ProgressView.tsx</span>: Transparent completion analytics and 100% milestone celebration banner.</li>
+            <li><span class="file-pill">src/views/SettingsView.tsx</span>: Native JSON plan export, validated JSON import, and safe plan reset.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Navigation &amp; Creation:</h3>
+          <ul style="padding-left: 1.25rem; font-size: 0.92rem; line-height: 1.6;">
+            <li><span class="file-pill">src/components/Sidebar.tsx</span>: Responsive desktop sidebar with active plan widget and percentage bar.</li>
+            <li><span class="file-pill">src/components/MobileNav.tsx</span>: Accessible bottom navigation bar with 44px touch targets.</li>
+            <li><span class="file-pill">src/components/PlanWizard.tsx</span>: 3-step creator modal: Goal → Category → Plan Preview → Launch.</li>
+            <li><span class="file-pill">src/components/EditGoalModal.tsx</span>: Safe title editing with whitespace validation.</li>
+            <li><span class="file-pill">src/utils/storage.ts</span>: Schema-validated persistence, export blobs, and activity logging.</li>
+          </ul>
+        </div>
+      </div>
 
       <div class="takeaway-box">
-        <strong style="color: var(--primary-dark); font-size: 1.05rem;">The Big Practice to Reuse: Plan-First Development</strong>
+        <strong style="color: var(--primary-dark); font-size: 1.05rem;">Architectural Learning Takeaway: Modular View Slicing</strong>
         <p style="margin-top: 0.4rem; color: var(--text);">
-          By completing the Scope, PRD, and Technical Specification before touching application code, every single file and interaction had a clear boundary. When unexpected TypeScript warnings arose, we knew exactly which component was affected and resolved it immediately.
+          By isolating views into independent modules that receive typed handlers and state from <code>App.tsx</code>, each screen remains focused on one clear responsibility. Adding JSON export/import and real activity tracking was seamless because the storage guard handles serialization without altering UI code.
         </p>
       </div>
     </div>
   </div>
 </body>
 </html>
-
