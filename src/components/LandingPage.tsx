@@ -2123,7 +2123,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </ul>
             </div>
 
-            {/* Column 4: Hackathon Project & Open Source */}
+            {/* Column 4: Open Source */}
             <div>
               <div style={{
                 fontSize: '0.8rem',
@@ -2133,10 +2133,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 color: 'var(--primary-dark)',
                 marginBottom: '1rem'
               }}>
-                Hackathon Submission
+                Open Source
               </div>
               <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', lineHeight: 1.55, marginBottom: '1rem' }}>
-                Created for the <strong>Build with AI: Basics</strong> Devpost Hackathon. Zero tracking, zero ads, 100% open source under the MIT License.
+                Built with a client-first, privacy-respecting architecture. Zero tracking, zero server lock-in, and 100% local-browser storage.
               </p>
               <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
                 <a
@@ -2193,13 +2193,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             color: 'var(--text-light)'
           }}>
             <div>
-              &copy; {new Date().getFullYear()} NextStep. Built with pride for the Devpost Build with AI Hackathon.
+              &copy; {new Date().getFullYear()} NextStep. All rights reserved.
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-              <span>MIT License</span>
+              <span style={{ cursor: 'pointer', color: 'var(--text-muted)' }} onClick={onNavigateToAbout}>Privacy</span>
               <span>&bull;</span>
-              <span>Client-Side LocalFirst</span>
+              <span style={{ cursor: 'pointer', color: 'var(--text-muted)' }} onClick={onNavigateToAbout}>Terms</span>
+              <span>&bull;</span>
+              <a href="mailto:contact@nextstep.app" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Contact</a>
               <span>&bull;</span>
               <div style={{ display: 'flex', gap: '0.65rem' }}>
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)' }} aria-label="Twitter">
