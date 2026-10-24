@@ -8,7 +8,8 @@ import {
   PlusCircle, 
   Activity,
   Flame,
-  Check
+  Check,
+  Home
 } from 'lucide-react';
 
 interface OverviewViewProps {
@@ -114,15 +115,28 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={() => onNavigate('plans')}
-          className="btn-secondary"
-          style={{ fontSize: '0.88rem', padding: '0.55rem 1.1rem' }}
-        >
-          <span>View Full 7-Day Plan</span>
-          <ArrowRight size={15} />
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <button
+            type="button"
+            onClick={() => onNavigate('home')}
+            className="btn-ghost"
+            style={{ fontSize: '0.85rem', padding: '0.5rem 0.85rem' }}
+            title="Return to Public Website Homepage"
+          >
+            <Home size={15} />
+            <span>Public Home</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onNavigate('plans')}
+            className="btn-secondary"
+            style={{ fontSize: '0.88rem', padding: '0.55rem 1.1rem' }}
+          >
+            <span>View Full 7-Day Plan</span>
+            <ArrowRight size={15} />
+          </button>
+        </div>
       </div>
 
       {/* Grid: Main Column + Side Column */}

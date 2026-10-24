@@ -24,6 +24,7 @@ import { ReflectionView } from './views/ReflectionView';
 import { InspirationLibraryView } from './views/InspirationLibraryView';
 import { AchievementsView } from './views/AchievementsView';
 import { AboutView } from './views/AboutView';
+import { GOAL_LIBRARY } from './data/goalLibrary';
 import { AlertCircle, RotateCcw } from 'lucide-react';
 
 export const App: React.FC = () => {
@@ -58,6 +59,18 @@ export const App: React.FC = () => {
   const handleStartGoalWithPrefill = (goal: string, category: Category) => {
     setWizardPrefill({ goal, category });
     setIsWizardOpen(true);
+  };
+
+  // Handler: Landing page category exploration
+  const handleLandingExplore = (category?: Category) => {
+    if (category) {
+      const example = GOAL_LIBRARY.find((g) => g.category === category);
+      if (example) {
+        handleStartGoalWithPrefill(example.title, example.category);
+        return;
+      }
+    }
+    setCurrentView('explore');
   };
 
   // Handler: Complete Plan Creation from Wizard
@@ -244,7 +257,8 @@ export const App: React.FC = () => {
               onOpenCreate={handleOpenNewWizard}
               hasActivePlan={!!activePlan}
               onGoToWorkspace={() => setCurrentView('overview')}
-              onExploreGoals={() => setCurrentView('explore')}
+              onExploreGoals={handleLandingExplore}
+              onNavigateToAbout={() => setCurrentView('about')}
             />
           </main>
         </>

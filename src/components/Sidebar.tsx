@@ -1,20 +1,21 @@
 import React from 'react';
 import { ViewType, Plan } from '../types';
 import { 
+  Home,
   LayoutDashboard, 
   Layers, 
   CalendarCheck, 
   BarChart3, 
-  BookMarked,
-  Trophy,
-  Compass,
-  Lightbulb,
-  Info,
+  BookMarked, 
+  Trophy, 
+  Compass, 
+  Lightbulb, 
+  Info, 
   Settings, 
   PlusCircle, 
-  Sparkles,
-  ArrowRight
+  ArrowRight 
 } from 'lucide-react';
+import { NextStepLogo } from './NextStepLogo';
 
 interface SidebarProps {
   currentView: ViewType;
@@ -54,48 +55,45 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div 
         onClick={() => onNavigate('home')}
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.65rem',
-          padding: '1.25rem 1.25rem 1.25rem 1.25rem',
+          padding: '1.25rem 1.25rem',
           borderBottom: '1px solid var(--border-light)',
           cursor: 'pointer'
         }}
         title="Go to Home"
       >
-        <div style={{
-          width: '32px',
-          height: '32px',
-          borderRadius: '8px',
-          background: 'var(--primary)',
-          color: '#FFFFFF',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: 'var(--shadow-sm)',
-          flexShrink: 0
-        }}>
-          <Sparkles size={16} />
-        </div>
-        <div>
-          <span style={{
-            fontFamily: 'var(--font-serif)',
-            fontSize: '1.35rem',
-            color: 'var(--primary-dark)',
-            letterSpacing: '-0.02em',
-            display: 'block',
-            lineHeight: 1
-          }}>
-            NextStep
-          </span>
-          <span style={{ fontSize: '0.72rem', color: 'var(--text-light)', fontWeight: 500 }}>
-            Goal Execution Platform
-          </span>
-        </div>
+        <NextStepLogo size="sm" showTagline={true} />
       </div>
 
       {/* Navigation Scrollable Body */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '0.9rem 0.75rem' }}>
+        {/* Dedicated Website Home Link */}
+        <div style={{ marginBottom: '0.9rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-light)' }}>
+          <button
+            type="button"
+            onClick={() => onNavigate('home')}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.65rem',
+              padding: '0.55rem 0.75rem',
+              borderRadius: 'var(--radius-md)',
+              fontSize: '0.88rem',
+              fontWeight: 600,
+              background: 'var(--surface-sage-light)',
+              color: 'var(--primary-dark)',
+              border: '1px solid var(--surface-sage)',
+              textAlign: 'left',
+              cursor: 'pointer',
+              transition: 'var(--transition)'
+            }}
+            title="Return to Public Website Homepage"
+          >
+            <Home size={16} style={{ color: 'var(--primary)' }} />
+            <span>Public Home</span>
+          </button>
+        </div>
+
         {/* Workspace Links Group */}
         <div style={{
           fontSize: '0.7rem',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ViewType } from '../types';
 import { 
+  Home,
   LayoutDashboard, 
   Layers, 
   CalendarCheck, 
@@ -15,11 +16,12 @@ interface MobileNavProps {
 
 export const MobileNav: React.FC<MobileNavProps> = ({ currentView, onNavigate }) => {
   const navItems: { view: ViewType; label: string; icon: React.ReactNode }[] = [
-    { view: 'overview', label: 'Overview', icon: <LayoutDashboard size={19} /> },
-    { view: 'plans', label: 'Plans', icon: <Layers size={19} /> },
-    { view: 'today', label: 'Today', icon: <CalendarCheck size={19} /> },
-    { view: 'explore', label: 'Explore', icon: <Compass size={19} /> },
-    { view: 'settings', label: 'Settings', icon: <Settings size={19} /> },
+    { view: 'home', label: 'Home', icon: <Home size={18} /> },
+    { view: 'overview', label: 'Overview', icon: <LayoutDashboard size={18} /> },
+    { view: 'plans', label: 'Plans', icon: <Layers size={18} /> },
+    { view: 'today', label: 'Today', icon: <CalendarCheck size={18} /> },
+    { view: 'explore', label: 'Explore', icon: <Compass size={18} /> },
+    { view: 'settings', label: 'Settings', icon: <Settings size={18} /> },
   ];
 
   return (
