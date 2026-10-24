@@ -10,7 +10,6 @@ import {
 } from './utils/storage';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
-import { MobileNav } from './components/MobileNav';
 import { LandingPage } from './components/LandingPage';
 import { PlanWizard } from './components/PlanWizard';
 import { ConfirmModal } from './components/ConfirmModal';
@@ -25,7 +24,7 @@ import { InspirationLibraryView } from './views/InspirationLibraryView';
 import { AchievementsView } from './views/AchievementsView';
 import { AboutView } from './views/AboutView';
 import { GOAL_LIBRARY } from './data/goalLibrary';
-import { AlertCircle, RotateCcw } from 'lucide-react';
+import { AlertCircle, RotateCcw, Menu } from 'lucide-react';
 
 export const App: React.FC = () => {
   const [activePlan, setActivePlan] = useState<Plan | null>(null);
@@ -34,6 +33,7 @@ export const App: React.FC = () => {
   const [wizardPrefill, setWizardPrefill] = useState<{ goal: string; category: Category } | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [storageError, setStorageError] = useState(false);
+  const [workspaceMobileSidebarOpen, setWorkspaceMobileSidebarOpen] = useState(false);
 
   // Initialize and load saved plan
   useEffect(() => {
@@ -264,17 +264,66 @@ export const App: React.FC = () => {
         </>
       ) : (
         <div className="workspace-layout">
-          {/* Desktop Sidebar */}
+          {/* Mobile Backdrop Overlay */}
+          <div 
+            className={`sidebar-backdrop ${workspaceMobileSidebarOpen ? 'active' : ''}`}
+            onClick={() => setWorkspaceMobileSidebarOpen(false)}
+          />
+
+          {/* Desktop/Mobile Fixed Sidebar */}
           <Sidebar
             currentView={currentView}
-            onNavigate={(view) => setCurrentView(view)}
+            onNavigate={(view) => {
+              setCurrentView(view);
+              setWorkspaceMobileSidebarOpen(false);
+            }}
             activePlan={activePlan}
             onOpenCreate={handleOpenNewWizard}
+            mobileOpen={workspaceMobileSidebarOpen}
+            onCloseMobile={() => setWorkspaceMobileSidebarOpen(false)}
           />
 
           {/* Main Content Viewport */}
           <div className="workspace-main">
-            <div className="content-wrapper">
+            {/* Mobile Workspace Top Navigation */}
+            <div className="workspace-mobile-header">
+              <button
+                type="button"
+                onClick={() => setWorkspaceMobileSidebarOpen(true)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.45rem',
+                  background: 'none',
+                  border: 'none',
+                  fontSize: '0.9rem',
+                  fontWeight: 600,
+                  color: 'var(--primary-dark)',
+                  cursor: 'pointer',
+                  padding: '0.2rem 0.4rem'
+                }}
+              >
+                <Menu size={18} />
+                <span>Dashboard Menu</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setCurrentView('home')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  color: 'var(--text-muted)',
+                  cursor: 'pointer'
+                }}
+              >
+                Exit to Home
+              </button>
+            </div>
+
+            <div style={{ width: '100%', maxWidth: '1440px', margin: '0 auto' }}>
               {currentView === 'overview' && (
                 <OverviewView
                   plan={activePlan}
@@ -364,12 +413,6 @@ export const App: React.FC = () => {
               )}
             </div>
           </div>
-
-          {/* Mobile Bottom Navigation */}
-          <MobileNav
-            currentView={currentView}
-            onNavigate={(view) => setCurrentView(view)}
-          />
         </div>
       )}
 
@@ -391,45 +434,6 @@ export const App: React.FC = () => {
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleConfirmDelete}
       />
-
-      {/* Universal Footer for workspace views (Home has its own comprehensive editorial footer) */}
-      {currentView !== 'home' && (
-        <footer style={{
-          marginTop: 'auto',
-          borderTop: '1px solid var(--border)',
-          padding: '1.5rem 0',
-          background: 'var(--surface)',
-          color: 'var(--text-muted)',
-          fontSize: '0.85rem'
-        }}>
-          <div className="content-wrapper" style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: '1rem'
-          }}>
-            <div>
-              <strong style={{ color: 'var(--primary-dark)', fontFamily: 'var(--font-serif)', fontSize: '1.05rem' }}>
-                NextStep
-              </strong>
-              <span style={{ fontSize: '0.82rem', marginLeft: '0.5rem' }}>
-                • Make your next step obvious
-              </span>
-            </div>
-
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', fontSize: '0.82rem' }}>
-              <span>Private browser storage</span>
-              <span>•</span>
-              <span>MIT License</span>
-              <span>•</span>
-              <a href="https://github.com/Sahrish351/NEXTSTEP.git" target="_blank" rel="noopener noreferrer">
-                GitHub Repository
-              </a>
-            </div>
-          </div>
-        </footer>
-      )}
     </div>
   );
 };

@@ -13,7 +13,8 @@ import {
   Info, 
   Settings, 
   PlusCircle, 
-  ArrowRight 
+  ArrowRight,
+  X
 } from 'lucide-react';
 import { NextStepLogo } from './NextStepLogo';
 
@@ -22,6 +23,8 @@ interface SidebarProps {
   onNavigate: (view: ViewType) => void;
   activePlan: Plan | null;
   onOpenCreate: () => void;
+  mobileOpen?: boolean;
+  onCloseMobile?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -29,9 +32,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onNavigate,
   activePlan,
   onOpenCreate,
+  mobileOpen = false,
+  onCloseMobile,
 }) => {
   const completedCount = activePlan ? activePlan.tasks.filter(t => t.completed).length : 0;
   const progressPercent = activePlan ? Math.round((completedCount / 7) * 100) : 0;
+
+  const handleItemClick = (view: ViewType) => {
+    onNavigate(view);
+    if (onCloseMobile) onCloseMobile();
+  };
 
   const workspaceLinks: { view: ViewType; label: string; icon: React.ReactNode }[] = [
     { view: 'overview', label: 'Overview', icon: <LayoutDashboard size={17} /> },
@@ -50,35 +60,61 @@ export const Sidebar: React.FC<SidebarProps> = ({
   ];
 
   return (
-    <aside className="app-sidebar" aria-label="Main Navigation">
+    <aside className={`app-sidebar ${mobileOpen ? 'mobile-open' : ''}`} aria-label="Main Navigation">
       {/* Brand Header */}
       <div 
-        onClick={() => onNavigate('home')}
         style={{
-          padding: '1.25rem 1.25rem',
+          padding: '1.15rem 1.15rem',
           borderBottom: '1px solid var(--border-light)',
-          cursor: 'pointer'
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          background: 'var(--surface)'
         }}
-        title="Go to Home"
       >
-        <NextStepLogo size="sm" showTagline={true} />
+        <div 
+          onClick={() => handleItemClick('home')}
+          style={{ cursor: 'pointer' }}
+          title="Go to Home"
+        >
+          <NextStepLogo size="sm" showTagline={true} />
+        </div>
+
+        {onCloseMobile && (
+          <button
+            type="button"
+            onClick={onCloseMobile}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'var(--text-muted)',
+              display: 'flex',
+              alignItems: 'center',
+              padding: '0.35rem'
+            }}
+            aria-label="Close Sidebar"
+          >
+            <X size={18} />
+          </button>
+        )}
       </div>
 
       {/* Navigation Scrollable Body */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '0.9rem 0.75rem' }}>
+      <div className="sidebar-scrollable-body">
         {/* Dedicated Website Home Link */}
-        <div style={{ marginBottom: '0.9rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-light)' }}>
+        <div style={{ marginBottom: '0.85rem', paddingBottom: '0.65rem', borderBottom: '1px solid var(--border-light)' }}>
           <button
             type="button"
-            onClick={() => onNavigate('home')}
+            onClick={() => handleItemClick('home')}
             style={{
               width: '100%',
               display: 'flex',
               alignItems: 'center',
               gap: '0.65rem',
-              padding: '0.55rem 0.75rem',
+              padding: '0.5rem 0.75rem',
               borderRadius: 'var(--radius-md)',
-              fontSize: '0.88rem',
+              fontSize: '0.86rem',
               fontWeight: 600,
               background: 'var(--surface-sage-light)',
               color: 'var(--primary-dark)',
@@ -89,48 +125,49 @@ export const Sidebar: React.FC<SidebarProps> = ({
             }}
             title="Return to Public Website Homepage"
           >
-            <Home size={16} style={{ color: 'var(--primary)' }} />
+            <Home size={15} style={{ color: 'var(--primary)' }} />
             <span>Public Home</span>
           </button>
         </div>
 
         {/* Workspace Links Group */}
         <div style={{
-          fontSize: '0.7rem',
+          fontSize: '0.68rem',
           textTransform: 'uppercase',
           letterSpacing: '0.06em',
           color: 'var(--text-light)',
           fontWeight: 700,
-          padding: '0 0.5rem 0.4rem 0.5rem'
+          padding: '0 0.5rem 0.35rem 0.5rem'
         }}>
           Workspace
         </div>
 
-        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.2rem', marginBottom: '1.25rem' }}>
+        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.15rem', marginBottom: '1.15rem' }}>
           {workspaceLinks.map((item) => {
             const isActive = currentView === item.view;
             return (
               <li key={item.view}>
                 <button
                   type="button"
-                  onClick={() => onNavigate(item.view)}
+                  onClick={() => handleItemClick(item.view)}
                   style={{
                     width: '100%',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.65rem',
-                    padding: '0.55rem 0.75rem',
+                    padding: '0.48rem 0.7rem',
                     borderRadius: 'var(--radius-md)',
-                    fontSize: '0.88rem',
+                    fontSize: '0.86rem',
                     fontWeight: isActive ? 600 : 500,
                     background: isActive ? 'var(--surface-sage)' : 'transparent',
                     color: isActive ? 'var(--primary-dark)' : 'var(--text-muted)',
                     textAlign: 'left',
-                    transition: 'var(--transition)'
+                    transition: 'var(--transition)',
+                    cursor: 'pointer'
                   }}
                   aria-current={isActive ? 'page' : undefined}
                 >
-                  <span style={{ color: isActive ? 'var(--primary)' : 'var(--text-light)' }}>
+                  <span style={{ color: isActive ? 'var(--primary)' : 'var(--text-light)', display: 'flex' }}>
                     {item.icon}
                   </span>
                   <span>{item.label}</span>
@@ -142,41 +179,42 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Explore & Discover Group */}
         <div style={{
-          fontSize: '0.7rem',
+          fontSize: '0.68rem',
           textTransform: 'uppercase',
           letterSpacing: '0.06em',
           color: 'var(--text-light)',
           fontWeight: 700,
-          padding: '0 0.5rem 0.4rem 0.5rem'
+          padding: '0 0.5rem 0.35rem 0.5rem'
         }}>
           Explore &amp; Reference
         </div>
 
-        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.15rem' }}>
           {exploreLinks.map((item) => {
             const isActive = currentView === item.view;
             return (
               <li key={item.view}>
                 <button
                   type="button"
-                  onClick={() => onNavigate(item.view)}
+                  onClick={() => handleItemClick(item.view)}
                   style={{
                     width: '100%',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.65rem',
-                    padding: '0.55rem 0.75rem',
+                    padding: '0.48rem 0.7rem',
                     borderRadius: 'var(--radius-md)',
-                    fontSize: '0.88rem',
+                    fontSize: '0.86rem',
                     fontWeight: isActive ? 600 : 500,
                     background: isActive ? 'var(--surface-sage)' : 'transparent',
                     color: isActive ? 'var(--primary-dark)' : 'var(--text-muted)',
                     textAlign: 'left',
-                    transition: 'var(--transition)'
+                    transition: 'var(--transition)',
+                    cursor: 'pointer'
                   }}
                   aria-current={isActive ? 'page' : undefined}
                 >
-                  <span style={{ color: isActive ? 'var(--primary)' : 'var(--text-light)' }}>
+                  <span style={{ color: isActive ? 'var(--primary)' : 'var(--text-light)', display: 'flex' }}>
                     {item.icon}
                   </span>
                   <span>{item.label}</span>
