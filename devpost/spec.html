@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NextStep — Technical Specification Companion</title>
+  <style>
+    :root {
+      --bg: #FAF8F3;
+      --surface: #FFFFFF;
+      --surface-sage: #DCEBE1;
+      --primary: #246B52;
+      --primary-dark: #194C3A;
+      --text: #202720;
+      --text-muted: #556358;
+      --accent: #E98770;
+      --border: #E2DDD5;
+      --font-serif: "DM Serif Display", Georgia, serif;
+      --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 2.5rem 1.25rem;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #FAF8F3;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      color: var(--primary-dark);
+      margin: 1.25rem 0 0.5rem 0;
+    }
+
+    pre {
+      background: #1E2522;
+      color: #E2E8F0;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      margin: 0.75rem 0;
+    }
+
+    code {
+      font-family: Consolas, Monaco, "Andale Mono", monospace;
+    }
+
+    .diagram-container {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      overflow-x: auto;
+    }
+
+    .diagram-svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 720px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .component-tag {
+      background: var(--surface-sage);
+      color: var(--primary-dark);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">Technical Specification Approved • Ready for Build</span>
+      <h1>NextStep — Architecture &amp; Data Flow</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem;">
+        React • TypeScript • Vite • LocalStorage • Zero External Server Overhead
+      </p>
+    </header>
+
+    <div class="card">
+      <h2>System Architecture &amp; Data Flow</h2>
+      <div class="diagram-container">
+        <svg class="diagram-svg" viewBox="0 0 800 200" width="800" height="200" xmlns="http://www.w3.org/2000/svg">
+          <!-- User -->
+          <rect x="20" y="70" width="100" height="60" rx="8" fill="#FAF8F3" stroke="#246B52" stroke-width="2"/>
+          <text x="70" y="105" font-family="sans-serif" font-size="13" font-weight="bold" fill="#194C3A" text-anchor="middle">User Interaction</text>
+
+          <!-- Arrow 1 -->
+          <path d="M 120 100 L 170 100" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- UI Layer -->
+          <rect x="170" y="30" width="190" height="140" rx="10" fill="#FAF8F3" stroke="#246B52" stroke-width="2"/>
+          <text x="265" y="55" font-family="sans-serif" font-size="13" font-weight="bold" fill="#194C3A" text-anchor="middle">React UI Layer</text>
+          <text x="265" y="80" font-family="sans-serif" font-size="11" fill="#556358" text-anchor="middle">&lt;LandingPage /&gt;</text>
+          <text x="265" y="102" font-family="sans-serif" font-size="11" fill="#556358" text-anchor="middle">&lt;GoalForm /&gt;</text>
+          <text x="265" y="124" font-family="sans-serif" font-size="11" fill="#556358" text-anchor="middle">&lt;PlanWorkspace /&gt;</text>
+          <text x="265" y="146" font-family="sans-serif" font-size="11" fill="#556358" text-anchor="middle">&lt;TaskCard /&gt; (7 cards)</text>
+
+          <!-- Arrow 2 -->
+          <path d="M 360 100 L 410 100" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- State Engine -->
+          <rect x="410" y="40" width="180" height="120" rx="10" fill="#DCEBE1" stroke="#246B52" stroke-width="2"/>
+          <text x="500" y="65" font-family="sans-serif" font-size="13" font-weight="bold" fill="#194C3A" text-anchor="middle">State Engine (App.tsx)</text>
+          <text x="500" y="90" font-family="sans-serif" font-size="11" fill="#194C3A" text-anchor="middle">createPlan(goal, cat)</text>
+          <text x="500" y="110" font-family="sans-serif" font-size="11" fill="#194C3A" text-anchor="middle">updateTask(id, text)</text>
+          <text x="500" y="130" font-family="sans-serif" font-size="11" fill="#194C3A" text-anchor="middle">toggleTask(id)</text>
+
+          <!-- Arrow 3 -->
+          <path d="M 590 100 L 640 100" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Persistence -->
+          <rect x="640" y="40" width="140" height="120" rx="10" fill="#FAF8F3" stroke="#246B52" stroke-width="2"/>
+          <text x="710" y="65" font-family="sans-serif" font-size="13" font-weight="bold" fill="#194C3A" text-anchor="middle">Storage Guard</text>
+          <text x="710" y="95" font-family="sans-serif" font-size="11" fill="#556358" text-anchor="middle">storage.ts</text>
+          <text x="710" y="118" font-family="sans-serif" font-size="11" fill="#246B52" text-anchor="middle">localStorage</text>
+          <text x="710" y="138" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">Safe JSON Validation</text>
+
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#246B52" />
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Data Model Specification</h2>
+      <pre><code>export interface Task {
+  id: string;           // e.g. "task-1"
+  dayNumber: number;    // 1 to 7
+  title: string;        // Editable task title
+  description: string;  // Detailed action instructions
+  completed: boolean;   // Checkmark state
+}
+
+export interface Plan {
+  id: string;           // Unique timestamp/UUID
+  goal: string;         // User's entered goal text
+  category: Category;   // Study | Career | Skill Building | Personal Project | Other
+  createdAt: string;    // ISO timestamp
+  tasks: Task[];        // Exactly 7 sequential tasks
+}</code></pre>
+    </div>
+
+    <div class="card">
+      <h2>Component Hierarchy &amp; PRD Mapping</h2>
+      <div class="grid-2">
+        <div>
+          <h3><span class="component-tag">&lt;LandingPage /&gt;</span></h3>
+          <p>Hero, value proposition, plan preview mockup, 3-pillar benefits, how-it-works. <em>Implements PRD FR-01.</em></p>
+
+          <h3><span class="component-tag">&lt;GoalForm /&gt;</span></h3>
+          <p>Input field with character count, 5 accessible category buttons, validation alerts. <em>Implements PRD FR-02 &amp; FR-03.</em></p>
+
+          <h3><span class="component-tag">&lt;PlanWorkspace /&gt;</span></h3>
+          <p>Active goal heading, category tag, delete plan trigger, and 7 task cards. <em>Implements PRD FR-04 &amp; FR-07.</em></p>
+        </div>
+        <div>
+          <h3><span class="component-tag">&lt;TaskCard /&gt;</span></h3>
+          <p>Default view, inline title/description editor, Save/Cancel, completion toggle. <em>Implements PRD FR-05 &amp; FR-06.</em></p>
+
+          <h3><span class="component-tag">&lt;ProgressSummary /&gt;</span></h3>
+          <p>Real-time calculated progress bar, percentage, and motivational badge. <em>Implements PRD FR-07.</em></p>
+
+          <h3><span class="component-tag">&lt;ConfirmModal /&gt;</span></h3>
+          <p>Safe focus-trapped deletion confirmation dialog protecting storage. <em>Implements PRD FR-08 &amp; FR-09.</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

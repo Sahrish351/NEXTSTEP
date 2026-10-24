@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NextStep — Product Requirements Document (PRD)</title>
+  <style>
+    :root {
+      --bg: #FAF8F3;
+      --surface: #FFFFFF;
+      --surface-sage: #DCEBE1;
+      --primary: #246B52;
+      --primary-dark: #194C3A;
+      --text: #202720;
+      --text-muted: #556358;
+      --accent: #E98770;
+      --border: #E2DDD5;
+      --font-serif: "DM Serif Display", Georgia, serif;
+      --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 2.5rem 1.25rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #FAF8F3;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      color: var(--primary-dark);
+      margin: 1.25rem 0 0.5rem 0;
+    }
+
+    ul, ol {
+      padding-left: 1.4rem;
+      margin: 0.5rem 0;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .diagram-container {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      overflow-x: auto;
+    }
+
+    .diagram-svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 720px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .feature-badge {
+      font-family: monospace;
+      font-size: 0.8rem;
+      background: var(--surface-sage);
+      color: var(--primary-dark);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .state-pill {
+      display: inline-block;
+      border-left: 3px solid var(--primary);
+      padding-left: 0.75rem;
+      margin: 0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">PRD Approved • Ready for Technical Spec</span>
+      <h1>NextStep — Product Requirements</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem;">
+        Turning overwhelming goals into clear, editable 7-day action paths.
+      </p>
+    </header>
+
+    <div class="card">
+      <h2>Architecture of User Surfaces</h2>
+      <div class="diagram-container">
+        <svg class="diagram-svg" viewBox="0 0 780 180" width="780" height="180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Landing Page -->
+          <rect x="20" y="20" width="220" height="140" rx="10" fill="#FAF8F3" stroke="#246B52" stroke-width="2"/>
+          <text x="130" y="45" font-family="sans-serif" font-size="14" font-weight="bold" fill="#194C3A" text-anchor="middle">Landing Page</text>
+          <text x="130" y="70" font-family="sans-serif" font-size="11" fill="#556358" text-anchor="middle">• Hero &amp; Value Proposition</text>
+          <text x="130" y="90" font-family="sans-serif" font-size="11" fill="#556358" text-anchor="middle">• Plan Preview &amp; Benefits</text>
+          <text x="130" y="110" font-family="sans-serif" font-size="11" fill="#556358" text-anchor="middle">• Goal &amp; Category Form</text>
+          <text x="130" y="135" font-family="sans-serif" font-size="10" font-weight="bold" fill="#246B52" text-anchor="middle">CTA: "Build my 7-day plan" ↓</text>
+
+          <!-- Transition Arrow -->
+          <path d="M 240 90 L 290 90" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Plan Workspace -->
+          <rect x="290" y="20" width="270" height="140" rx="10" fill="#DCEBE1" stroke="#246B52" stroke-width="2"/>
+          <text x="425" y="45" font-family="sans-serif" font-size="14" font-weight="bold" fill="#194C3A" text-anchor="middle">Plan Workspace</text>
+          <text x="425" y="70" font-family="sans-serif" font-size="11" fill="#194C3A" text-anchor="middle">• Active Goal &amp; Category Badge</text>
+          <text x="425" y="90" font-family="sans-serif" font-size="11" fill="#194C3A" text-anchor="middle">• Real-Time Progress Bar &amp; %</text>
+          <text x="425" y="110" font-family="sans-serif" font-size="11" fill="#194C3A" text-anchor="middle">• 7 Connected Task Cards</text>
+          <text x="425" y="135" font-family="sans-serif" font-size="10" font-weight="bold" fill="#194C3A" text-anchor="middle">Inline Edit • Checkmarks • Persist</text>
+
+          <!-- Deletion Arrow -->
+          <path d="M 560 90 L 610 90" stroke="#E98770" stroke-width="2" marker-end="url(#red-arrow)"/>
+
+          <!-- Empty State -->
+          <rect x="610" y="20" width="150" height="140" rx="10" fill="#FAF8F3" stroke="#E98770" stroke-width="2"/>
+          <text x="685" y="45" font-family="sans-serif" font-size="13" font-weight="bold" fill="#202720" text-anchor="middle">Empty State</text>
+          <text x="685" y="75" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">"Ready for next step?"</text>
+          <text x="685" y="105" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">Confirmed Deletion</text>
+          <text x="685" y="135" font-family="sans-serif" font-size="10" font-weight="bold" fill="#246B52" text-anchor="middle">New Plan CTA ↺</text>
+
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#246B52" />
+            </marker>
+            <marker id="red-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#E98770" />
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Functional Requirements Matrix</h2>
+      <div class="grid-2">
+        <div>
+          <h3><span class="feature-badge">FR-01</span> Landing Page &amp; Hero</h3>
+          <p>Clean editorial presentation with working CTA that smoothly scrolls down to the creation form.</p>
+
+          <h3><span class="feature-badge">FR-02</span> Goal Input Validation</h3>
+          <p>Rejects empty or whitespace-only goals, trims extra spaces, enforces friendly character length limits.</p>
+
+          <h3><span class="feature-badge">FR-03</span> Category Selector</h3>
+          <p>Study, Career, Skill Building, Personal Project, Other. Accessible with full keyboard support.</p>
+
+          <h3><span class="feature-badge">FR-04</span> 7-Day Plan Generation</h3>
+          <p>Produces exactly seven logical starter tasks tailored to category and goal as editable suggestions.</p>
+        </div>
+        <div>
+          <h3><span class="feature-badge">FR-05</span> Inline Task Editing</h3>
+          <p>Direct inline title and description editing. Save checks non-empty; Cancel cleanly restores prior content.</p>
+
+          <h3><span class="feature-badge">FR-06</span> Completion &amp; Accurate Progress</h3>
+          <p>Two-way checkmarks update active progress bar and percentage (e.g. 2 of 7 completed • 29%).</p>
+
+          <h3><span class="feature-badge">FR-07</span> Browser Persistence</h3>
+          <p>Saves state in <code>localStorage</code>. Returning or refreshing lands directly in the active workspace.</p>
+
+          <h3><span class="feature-badge">FR-08</span> Safe Deletion &amp; Empty State</h3>
+          <p>Modal confirmation dialog protects against accidental deletion and cleanly restores empty state.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Visual Identity &amp; Palette</h2>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+        <div style="background: #FAF8F3; border: 1px solid #E2DDD5; padding: 1rem; border-radius: 8px; flex: 1; min-width: 140px;">
+          <strong>Warm Ivory</strong><br><code>#FAF8F3</code><br><span style="font-size:0.8rem; color:#556358;">Soft Background</span>
+        </div>
+        <div style="background: #246B52; color: #FFF; padding: 1rem; border-radius: 8px; flex: 1; min-width: 140px;">
+          <strong>Forest Green</strong><br><code>#246B52</code><br><span style="font-size:0.8rem; opacity:0.9;">Brand Primary</span>
+        </div>
+        <div style="background: #DCEBE1; color: #194C3A; padding: 1rem; border-radius: 8px; flex: 1; min-width: 140px;">
+          <strong>Soft Sage</strong><br><code>#DCEBE1</code><br><span style="font-size:0.8rem;">Surfaces &amp; Badges</span>
+        </div>
+        <div style="background: #E98770; color: #FFF; padding: 1rem; border-radius: 8px; flex: 1; min-width: 140px;">
+          <strong>Restrained Coral</strong><br><code>#E98770</code><br><span style="font-size:0.8rem;">Accent Callouts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

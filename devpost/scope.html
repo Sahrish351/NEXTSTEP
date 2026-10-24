@@ -1,0 +1,291 @@
+<!-- Canonical visual companion for devpost/scope.md -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NextStep — Scope Review</title>
+  <style>
+    :root {
+      --bg: #FAF8F3;
+      --surface: #FFFFFF;
+      --surface-sage: #DCEBE1;
+      --primary: #246B52;
+      --primary-dark: #194C3A;
+      --text: #202720;
+      --text-muted: #556358;
+      --accent: #E98770;
+      --border: #E2DDD5;
+      --font-serif: "DM Serif Display", Georgia, serif;
+      --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 2.5rem 1.25rem;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--surface-sage);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .tagline {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .highlight-box {
+      background: var(--surface-sage);
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--primary-dark);
+      margin: 0.75rem 0;
+    }
+
+    ul, ol {
+      padding-left: 1.4rem;
+      margin-top: 0.5rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    .diagram-container {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      overflow-x: auto;
+    }
+
+    .diagram-svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 680px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      h1 { font-size: 2rem; }
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .pill {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .cut-item {
+      border-left: 3px solid var(--accent);
+      padding-left: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .cut-title {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .cut-reason {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge" style="background:#246B52; color:#FAF8F3;">Scope Approved • Ready for PRD</span>
+      <h1>NextStep</h1>
+      <p class="tagline">Make your next step obvious — Turning overwhelming goals into clear 7-day action paths.</p>
+    </header>
+
+    <div class="card">
+      <h2>The Unique Kernel</h2>
+      <p>Instant cognitive relief from "where do I even start?". Instead of confronting a blank screen, NextStep immediately supplies a structured, 7-day sequential starter path that is fully editable and tracked in real-time.</p>
+      <div class="highlight-box">
+        "I know what to do next, and I can actually start."
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>User Journey Diagram</h2>
+      <div class="diagram-container">
+        <svg class="diagram-svg" viewBox="0 0 760 140" width="760" height="140" xmlns="http://www.w3.org/2000/svg">
+          <!-- Step 1 -->
+          <rect x="10" y="30" width="130" height="70" rx="8" fill="#FAF8F3" stroke="#246B52" stroke-width="2"/>
+          <text x="75" y="60" font-family="sans-serif" font-size="12" font-weight="bold" fill="#246B52" text-anchor="middle">1. Landing Page</text>
+          <text x="75" y="78" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">Clear Value & CTA</text>
+
+          <!-- Arrow 1 -->
+          <path d="M 140 65 L 165 65" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Step 2 -->
+          <rect x="165" y="30" width="130" height="70" rx="8" fill="#FAF8F3" stroke="#246B52" stroke-width="2"/>
+          <text x="230" y="60" font-family="sans-serif" font-size="12" font-weight="bold" fill="#246B52" text-anchor="middle">2. Goal & Category</text>
+          <text x="230" y="78" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">Study, Career, etc.</text>
+
+          <!-- Arrow 2 -->
+          <path d="M 295 65 L 320 65" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Step 3 -->
+          <rect x="320" y="30" width="130" height="70" rx="8" fill="#DCEBE1" stroke="#246B52" stroke-width="2"/>
+          <text x="385" y="60" font-family="sans-serif" font-size="12" font-weight="bold" fill="#194C3A" text-anchor="middle">3. 7-Day Plan</text>
+          <text x="385" y="78" font-family="sans-serif" font-size="10" fill="#194C3A" text-anchor="middle">Sequential Actions</text>
+
+          <!-- Arrow 3 -->
+          <path d="M 450 65 L 475 65" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Step 4 -->
+          <rect x="475" y="30" width="130" height="70" rx="8" fill="#FAF8F3" stroke="#246B52" stroke-width="2"/>
+          <text x="540" y="60" font-family="sans-serif" font-size="12" font-weight="bold" fill="#246B52" text-anchor="middle">4. Edit & Check</text>
+          <text x="540" y="78" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">Real-time Progress</text>
+
+          <!-- Arrow 4 -->
+          <path d="M 605 65 L 630 65" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Step 5 -->
+          <rect x="630" y="30" width="120" height="70" rx="8" fill="#FAF8F3" stroke="#246B52" stroke-width="2"/>
+          <text x="690" y="60" font-family="sans-serif" font-size="12" font-weight="bold" fill="#246B52" text-anchor="middle">5. Persistence</text>
+          <text x="690" y="78" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">Local Storage</text>
+
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#246B52" />
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h2>Who It's For</h2>
+        <ul>
+          <li><strong>Job Seekers:</strong> Tackling daunting interview prep step by step.</li>
+          <li><strong>Students:</strong> Breaking exam syllabus into 7 daily reviews.</li>
+          <li><strong>Skill Learners:</strong> Building consistent daily practice momentum.</li>
+          <li><strong>Creators & Builders:</strong> Kicking off personal side projects without overwhelm.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Visual Personality</h2>
+        <p>A warm, editorial balance of stationery calm and modern digital clarity.</p>
+        <div class="pill-list">
+          <span class="pill" style="background: #FAF8F3; border-color: #DCEBE1;">Warm Ivory (#FAF8F3)</span>
+          <span class="pill" style="background: #246B52; color: #FFF;">Forest Green (#246B52)</span>
+          <span class="pill" style="background: #DCEBE1; color: #194C3A;">Soft Sage (#DCEBE1)</span>
+          <span class="pill" style="background: #E98770; color: #FFF;">Restrained Coral (#E98770)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Proof of Concept Boundary</h2>
+      <ul>
+        <li><strong>Homepage & CTA:</strong> Clean landing section with working plan creator flow.</li>
+        <li><strong>Goal & Categories:</strong> Validated goal input with 5 categories (Study, Career, Skill Building, Personal Project, Other).</li>
+        <li><strong>7-Day Sequential Tasks:</strong> Generates exactly 7 logical, progressive daily tasks tailored to the category and goal, clearly framed as editable suggestions without false guarantees.</li>
+        <li><strong>Task Editing:</strong> Inline title and description editing with Save & Cancel safety.</li>
+        <li><strong>Completion Toggling:</strong> Two-way checkmarks with clear visual feedback not dependent solely on color.</li>
+        <li><strong>Accurate Dynamic Progress:</strong> Real-time calculated progress percentage and counter (e.g. "2 of 7 completed (29%)").</li>
+        <li><strong>Local Persistence:</strong> Safe browser <code>localStorage</code> with refresh recovery and corrupted data protection.</li>
+        <li><strong>Safe Deletion & Empty State:</strong> Plan reset requiring confirmation dialog and inviting empty state.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Explicitly Out of Scope (Cuts)</h2>
+      <div class="cut-item">
+        <div class="cut-title">User Accounts & Authentication</div>
+        <div class="cut-reason">Friction-free proof of concept; local browser storage is immediate, private, and zero setup.</div>
+      </div>
+      <div class="cut-item">
+        <div class="cut-title">Cloud Databases & Backend Server</div>
+        <div class="cut-reason">Adds latency, server hosting costs, and complexity without enhancing the core user experience.</div>
+      </div>
+      <div class="cut-item">
+        <div class="cut-title">Paid AI Generation API</div>
+        <div class="cut-reason">Transparent, editable starter templates are fast, reliable, zero-cost, and honest.</div>
+      </div>
+      <div class="cut-item">
+        <div class="cut-title">Fake Metrics & Fabricated Testimonials</div>
+        <div class="cut-reason">Maintains product integrity and honesty in hackathon evaluation.</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

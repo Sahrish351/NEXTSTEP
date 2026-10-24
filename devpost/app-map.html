@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NextStep — Application Map &amp; Architecture Tour</title>
+  <style>
+    :root {
+      --bg: #FAF8F3;
+      --surface: #FFFFFF;
+      --surface-sage: #DCEBE1;
+      --primary: #246B52;
+      --primary-dark: #194C3A;
+      --text: #202720;
+      --text-muted: #556358;
+      --accent: #E98770;
+      --border: #E2DDD5;
+      --font-serif: "DM Serif Display", Georgia, serif;
+      --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 2.5rem 1.25rem;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #FAF8F3;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 2.3rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      color: var(--primary);
+      margin-bottom: 0.85rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      margin: 1rem 0 0.35rem 0;
+    }
+
+    .file-pill {
+      font-family: monospace;
+      font-size: 0.85rem;
+      background: var(--surface-sage);
+      color: var(--primary-dark);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .diagram-container {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      overflow-x: auto;
+    }
+
+    .diagram-svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .takeaway-box {
+      background: var(--surface-sage);
+      border-left: 4px solid var(--primary);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">App Map &amp; Code Architecture</span>
+      <h1>NextStep — Codebase Navigation Tour</h1>
+      <p style="color: var(--text-muted); font-size: 1.05rem;">
+        An interactive guide to how components, state, and browser storage work together.
+      </p>
+    </header>
+
+    <div class="card">
+      <h2>Component Flow &amp; Data Journey</h2>
+      <div class="diagram-container">
+        <svg class="diagram-svg" viewBox="0 0 760 220" width="760" height="220" xmlns="http://www.w3.org/2000/svg">
+          <!-- App.tsx Container -->
+          <rect x="20" y="20" width="720" height="180" rx="12" fill="#FAF8F3" stroke="#246B52" stroke-width="2" stroke-dasharray="5,5"/>
+          <text x="40" y="45" font-family="sans-serif" font-size="12" font-weight="bold" fill="#194C3A">App.tsx (Root State Coordinator)</text>
+
+          <!-- Landing Surface -->
+          <rect x="40" y="60" width="190" height="120" rx="8" fill="#FFFFFF" stroke="#E2DDD5" stroke-width="1.5"/>
+          <text x="135" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#246B52" text-anchor="middle">Surface 1: Arrival</text>
+          <text x="135" y="110" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">&lt;LandingPage /&gt;</text>
+          <text x="135" y="130" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">&lt;GoalForm /&gt;</text>
+          <text x="135" y="155" font-family="sans-serif" font-size="9" fill="#194C3A" font-weight="bold" text-anchor="middle">Input → 5 Categories</text>
+
+          <!-- Transition 1 -->
+          <path d="M 230 120 L 275 120" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Generator -->
+          <rect x="275" y="80" width="140" height="80" rx="8" fill="#DCEBE1" stroke="#246B52" stroke-width="1.5"/>
+          <text x="345" y="105" font-family="sans-serif" font-size="11" font-weight="bold" fill="#194C3A" text-anchor="middle">templates.ts</text>
+          <text x="345" y="125" font-family="sans-serif" font-size="10" fill="#194C3A" text-anchor="middle">generateTasksForGoal()</text>
+          <text x="345" y="145" font-family="sans-serif" font-size="9" fill="#556358" text-anchor="middle">7 Sequential Tasks</text>
+
+          <!-- Transition 2 -->
+          <path d="M 415 120 L 460 120" stroke="#246B52" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Workspace Surface -->
+          <rect x="460" y="60" width="260" height="120" rx="8" fill="#FFFFFF" stroke="#246B52" stroke-width="2"/>
+          <text x="590" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#194C3A" text-anchor="middle">Surface 2: Workspace</text>
+          <text x="590" y="105" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">&lt;ProgressSummary /&gt; (Realtime %)</text>
+          <text x="590" y="125" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">&lt;TaskCard /&gt; (7 cards with inline edit)</text>
+          <text x="590" y="145" font-family="sans-serif" font-size="10" fill="#556358" text-anchor="middle">&lt;ConfirmModal /&gt; (Safe delete)</text>
+          <text x="590" y="165" font-family="sans-serif" font-size="9" fill="#246B52" font-weight="bold" text-anchor="middle">storage.ts ↔ localStorage</text>
+
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#246B52" />
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>File Navigation Index</h2>
+      <ul>
+        <li>
+          <span class="file-pill">src/App.tsx</span>: The single source of truth. Owns the active plan state, handles navigation transitions, connects actions to storage, and controls the deletion confirmation modal.
+        </li>
+        <li>
+          <span class="file-pill">src/data/templates.ts</span>: Holds the 5 domain template banks (Career, Study, Skill Building, Personal Project, Other). Returns seven structured daily tasks when given a category.
+        </li>
+        <li>
+          <span class="file-pill">src/utils/storage.ts</span>: Manages reading and writing to browser <code>localStorage</code>. Includes strict schema validation so corrupted data won't crash the UI.
+        </li>
+        <li>
+          <span class="file-pill">src/components/TaskCard.tsx</span>: Handles both view mode and inline editing mode with Save and Cancel safeguards. Emits changes cleanly back to <code>App.tsx</code>.
+        </li>
+        <li>
+          <span class="file-pill">src/components/ProgressSummary.tsx</span>: Computes the exact percentage and completed count dynamically with accessible ARIA progress bar tags.
+        </li>
+        <li>
+          <span class="file-pill">src/components/ConfirmModal.tsx</span>: Traps focus and listens for the <code>Escape</code> key to prevent accidental plan deletion.
+        </li>
+      </ul>
+
+      <div class="takeaway-box">
+        <strong style="color: var(--primary-dark); font-size: 1.05rem;">The Big Practice to Reuse: Plan-First Development</strong>
+        <p style="margin-top: 0.4rem; color: var(--text);">
+          By completing the Scope, PRD, and Technical Specification before touching application code, every single file and interaction had a clear boundary. When unexpected TypeScript warnings arose, we knew exactly which component was affected and resolved it immediately.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
