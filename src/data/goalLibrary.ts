@@ -8,7 +8,7 @@ export const GOAL_LIBRARY: GoalExample[] = [
     description: 'Structure role requirements, technical drills, system design, and STAR behavioral questions into 7 focused daily blocks.',
     targetAudience: 'Job seekers targeting junior or mid-level web development positions.',
     firstStep: 'Analyze 3 job descriptions and list the top 3 technical skills and 2 common question patterns.',
-    imageKey: 'careerInterview',
+    imageKey: 'careerFrontend',
   },
   {
     id: 'goal-career-2',
@@ -17,7 +17,7 @@ export const GOAL_LIBRARY: GoalExample[] = [
     description: 'Transform your professional profiles with quantifiable achievements, active role keywords, and portfolio proofs.',
     targetAudience: 'Career changers and professionals preparing for an active outreach cycle.',
     firstStep: 'Audit your current resume and highlight 5 bullet points with metrics (e.g. % saved, users served).',
-    imageKey: 'careerInterview',
+    imageKey: 'careerResume',
   },
   {
     id: 'goal-study-1',
@@ -26,7 +26,7 @@ export const GOAL_LIBRARY: GoalExample[] = [
     description: 'Break complex biochemical pathways and anatomical diagrams into daily active-recall notes and practice quizzes.',
     targetAudience: 'College or high-school students facing heavy memorization exams.',
     firstStep: 'Map exam syllabus chapters and rank your top 3 lowest-confidence concepts.',
-    imageKey: 'studentStudy',
+    imageKey: 'studyBiology',
   },
   {
     id: 'goal-study-2',
@@ -35,7 +35,7 @@ export const GOAL_LIBRARY: GoalExample[] = [
     description: 'Synthesize 5 foundational literature papers and outline your theoretical framework step by step.',
     targetAudience: 'Graduate students and researchers feeling overwhelmed by literature review.',
     firstStep: 'Select 5 priority papers, download PDFs, and set up a structured summary spreadsheet.',
-    imageKey: 'studentStudy',
+    imageKey: 'studyThesis',
   },
   {
     id: 'goal-skill-1',
@@ -44,7 +44,7 @@ export const GOAL_LIBRARY: GoalExample[] = [
     description: 'Transition from vanilla JavaScript to type-safe interfaces, generics, utility types, and strict compilation.',
     targetAudience: 'Developers wanting to write robust, maintainable frontend and backend code.',
     firstStep: 'Configure a clean tsconfig.json and build 3 custom interfaces with union types.',
-    imageKey: 'skillPractice',
+    imageKey: 'skillTypeScript',
   },
   {
     id: 'goal-skill-2',
@@ -53,7 +53,7 @@ export const GOAL_LIBRARY: GoalExample[] = [
     description: 'Understand WCAG AA standards, contrast checks, keyboard focus traps, and screen-reader semantics.',
     targetAudience: 'Designers and frontend engineers seeking to build inclusive web experiences.',
     firstStep: 'Run an axe accessibility audit on one existing project and note 3 required remediations.',
-    imageKey: 'skillPractice',
+    imageKey: 'skillAccessibility',
   },
   {
     id: 'goal-project-1',
@@ -62,7 +62,7 @@ export const GOAL_LIBRARY: GoalExample[] = [
     description: 'Design wireframes, build responsive project cards, integrate a contact form, and deploy publicly to Vercel/GitHub Pages.',
     targetAudience: 'Aspiring software engineers creating public proof of work for recruiters.',
     firstStep: 'Sketch a single-page wireframe on paper outlining Hero, Projects, and About sections.',
-    imageKey: 'creatorProject',
+    imageKey: 'projectPortfolio',
   },
   {
     id: 'goal-project-2',
@@ -71,7 +71,7 @@ export const GOAL_LIBRARY: GoalExample[] = [
     description: 'Outline an insightful tutorial on a problem you recently solved, gather code snippets, and publish on Dev.to or Medium.',
     targetAudience: 'Developers and learners wanting to build public credibility and solidify concepts.',
     firstStep: 'Choose one specific bug you recently debugged and write a 3-bullet core takeaway.',
-    imageKey: 'creatorProject',
+    imageKey: 'projectBlog',
   },
   {
     id: 'goal-other-1',
@@ -80,7 +80,7 @@ export const GOAL_LIBRARY: GoalExample[] = [
     description: 'Set a disciplined wake-up trigger, place reading materials beside coffee, and complete chapter reviews each morning.',
     targetAudience: 'Busy individuals wanting to cultivate quiet, uninterrupted personal growth.',
     firstStep: 'Select one non-fiction book, place it on your desk the night before, and set a 30-minute timer.',
-    imageKey: 'calmHabit',
+    imageKey: 'habitReading',
   },
 ];
 

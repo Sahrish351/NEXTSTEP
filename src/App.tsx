@@ -35,7 +35,7 @@ export const App: React.FC = () => {
   const [storageError, setStorageError] = useState(false);
   const [workspaceMobileSidebarOpen, setWorkspaceMobileSidebarOpen] = useState(false);
 
-  // Initialize and load saved plan
+  // Initialize and load saved plan (Always start on Homepage 'home', never auto-redirect to dashboard)
   useEffect(() => {
     const { plan, error } = loadSavedPlan();
     if (error) {
@@ -43,7 +43,7 @@ export const App: React.FC = () => {
       setCurrentView('home');
     } else if (plan) {
       setActivePlan(plan);
-      setCurrentView('overview');
+      setCurrentView('home'); // Respect user intent: always open home page first
     } else {
       setCurrentView('home');
     }

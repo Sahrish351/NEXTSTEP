@@ -194,7 +194,7 @@ export const ExploreGoalsView: React.FC<ExploreGoalsViewProps> = ({
           gap: '1.5rem'
         }}>
           {filteredGoals.map((item) => {
-            const imgAsset = IMAGES[item.imageKey] || IMAGES.heroWorkspace;
+            const imgAsset = IMAGES[item.imageKey] || IMAGES.careerFrontend || IMAGES.heroWorkspace;
             return (
               <div
                 key={item.id}
