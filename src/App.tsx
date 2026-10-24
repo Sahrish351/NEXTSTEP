@@ -392,42 +392,44 @@ export const App: React.FC = () => {
         onConfirm={handleConfirmDelete}
       />
 
-      {/* Universal Footer */}
-      <footer style={{
-        marginTop: 'auto',
-        borderTop: '1px solid var(--border)',
-        padding: '1.5rem 0',
-        background: 'var(--surface)',
-        color: 'var(--text-muted)',
-        fontSize: '0.85rem'
-      }}>
-        <div className="content-wrapper" style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '1rem'
+      {/* Universal Footer for workspace views (Home has its own comprehensive editorial footer) */}
+      {currentView !== 'home' && (
+        <footer style={{
+          marginTop: 'auto',
+          borderTop: '1px solid var(--border)',
+          padding: '1.5rem 0',
+          background: 'var(--surface)',
+          color: 'var(--text-muted)',
+          fontSize: '0.85rem'
         }}>
-          <div>
-            <strong style={{ color: 'var(--primary-dark)', fontFamily: 'var(--font-serif)', fontSize: '1.05rem' }}>
-              NextStep
-            </strong>
-            <span style={{ fontSize: '0.82rem', marginLeft: '0.5rem' }}>
-              • Make your next step obvious
-            </span>
-          </div>
+          <div className="content-wrapper" style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '1rem'
+          }}>
+            <div>
+              <strong style={{ color: 'var(--primary-dark)', fontFamily: 'var(--font-serif)', fontSize: '1.05rem' }}>
+                NextStep
+              </strong>
+              <span style={{ fontSize: '0.82rem', marginLeft: '0.5rem' }}>
+                • Make your next step obvious
+              </span>
+            </div>
 
-          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', fontSize: '0.82rem' }}>
-            <span>Private browser storage</span>
-            <span>•</span>
-            <span>MIT License</span>
-            <span>•</span>
-            <a href="https://github.com/Sahrish351/NEXTSTEP.git" target="_blank" rel="noopener noreferrer">
-              GitHub Repository
-            </a>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', fontSize: '0.82rem' }}>
+              <span>Private browser storage</span>
+              <span>•</span>
+              <span>MIT License</span>
+              <span>•</span>
+              <a href="https://github.com/Sahrish351/NEXTSTEP.git" target="_blank" rel="noopener noreferrer">
+                GitHub Repository
+              </a>
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      )}
     </div>
   );
 };

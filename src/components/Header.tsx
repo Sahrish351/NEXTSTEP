@@ -73,8 +73,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Center Desktop Navigation Links */}
         <nav 
-          style={{ display: 'flex', alignItems: 'center', gap: '1.8rem' }}
-          className="desktop-only-text"
+          className="header-nav-desktop"
           aria-label="Primary Desktop Navigation"
         >
           <button
@@ -153,7 +152,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={() => handleNavClick('overview')}
-              className="btn-primary"
+              className="btn-primary header-cta-btn"
               style={{
                 fontSize: '0.86rem',
                 padding: '0.52rem 1.15rem',
@@ -169,7 +168,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={() => { setMobileMenuOpen(false); onOpenCreate(); }}
-              className="btn-primary"
+              className="btn-primary header-cta-btn"
               style={{
                 fontSize: '0.86rem',
                 padding: '0.52rem 1.15rem',

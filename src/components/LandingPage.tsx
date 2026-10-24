@@ -60,6 +60,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     { label: '📚 Biology Finals', goal: 'Ace university biology final examination', cat: 'Study' as Category },
     { label: '🚀 Launch SaaS MVP', goal: 'Build and deploy my first SaaS web application', cat: 'Personal Project' as Category },
     { label: '🎨 Master Figma', goal: 'Master modern Figma design systems and tokens', cat: 'Skill Building' as Category },
+    { label: '💼 System Design', goal: 'Master distributed system design interview patterns', cat: 'Career' as Category },
+    { label: '🏃 Run 5K Sprint', goal: 'Train and complete first 5-kilometer endurance run', cat: 'Personal Project' as Category },
   ];
 
   const handleHeroGoalChange = (goal: string, cat: Category) => {
@@ -157,16 +159,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 <span>The 7-Day Sprint Architecture · Built for High-Agency Action</span>
               </div>
 
-              {/* Editorial Display Headline */}
+              {/* Editorial Display Headline (Non-italic as requested) */}
               <h1 className="serif-heading" style={{
-                fontSize: 'clamp(2.5rem, 5vw, 4.1rem)',
+                fontSize: 'clamp(2.4rem, 5vw, 4.1rem)',
                 color: 'var(--primary-dark)',
                 lineHeight: 1.12,
                 letterSpacing: '-0.03em',
                 marginBottom: '1.25rem'
               }}>
                 Big ambitions.<br />
-                <span style={{ fontStyle: 'italic', color: 'var(--primary)' }}>Seven obvious days.</span>
+                <span style={{ color: 'var(--primary)', fontWeight: 700 }}>Seven obvious days.</span>
               </h1>
 
               {/* Subheadline */}
@@ -374,7 +376,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   </div>
 
                   {/* Interactive 7-Day Timeline Stepper Track */}
-                  <div style={{
+                  <div className="sprint-track-container" style={{
                     background: 'var(--bg)',
                     borderRadius: 'var(--radius-md)',
                     padding: '0.9rem 0.8rem',
@@ -385,7 +387,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      position: 'relative'
+                      position: 'relative',
+                      minWidth: '290px'
                     }}>
                       {/* Connecting Line */}
                       <div style={{
@@ -1928,18 +1931,42 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </button>
             </div>
 
-            {/* Right Side: Romantic Handwritten Script */}
-            <div style={{ textAlign: 'right', display: 'flex', justifyContent: 'flex-end' }}>
-              <div className="font-script" style={{
-                fontSize: 'clamp(2.4rem, 4.5vw, 3.4rem)',
-                color: 'rgba(250, 248, 243, 0.95)',
-                lineHeight: 1.15,
-                transform: 'rotate(-4deg)',
-                textShadow: '0 4px 16px rgba(0,0,0,0.4)',
-                userSelect: 'none'
+            {/* Right Side: Sleek Glassmorphic Velocity Promise Card */}
+            <div style={{ display: 'flex', justifyContent: 'flex-start', width: '100%' }}>
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255, 255, 255, 0.22)',
+                borderRadius: '16px',
+                padding: 'clamp(1.25rem, 3vw, 1.85rem)',
+                maxWidth: '420px',
+                width: '100%',
+                color: '#FAF8F3',
+                boxShadow: '0 20px 40px rgba(0, 0, 0, 0.25)'
               }}>
-                Better Plans<br />
-                Brighter Futures ♡
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', marginBottom: '1rem' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#34D399', boxShadow: '0 0 10px #34D399' }} />
+                  <span style={{ fontSize: '0.76rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700, color: '#A7F3D0' }}>
+                    The 7-Day Velocity Promise
+                  </span>
+                </div>
+                <div style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.45rem)', fontFamily: 'var(--font-serif)', lineHeight: 1.3, marginBottom: '0.75rem', color: '#FFFFFF' }}>
+                  One week from today,<br />you won&apos;t be at zero.
+                </div>
+                <p style={{ fontSize: '0.84rem', color: 'rgba(250, 248, 243, 0.85)', lineHeight: 1.55, marginBottom: '1.25rem' }}>
+                  Give 40 minutes each morning. Complete one atomic step. Replace anxiety with undeniable momentum.
+                </p>
+                <div style={{ paddingTop: '1rem', borderTop: '1px solid rgba(255, 255, 255, 0.15)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                  <div>
+                    <div style={{ fontSize: '0.72rem', color: 'rgba(250, 248, 243, 0.7)' }}>Daily Execution</div>
+                    <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#FFFFFF', marginTop: '0.15rem' }}>35–45 min</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.72rem', color: 'rgba(250, 248, 243, 0.7)' }}>Sprint Completion</div>
+                    <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#34D399', marginTop: '0.15rem' }}>88.4%</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1947,112 +1974,244 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* =========================================================================
-          SECTION 10: EDITORIAL FOOTER
+          SECTION 10: EDITORIAL FOOTER (COMPREHENSIVE MULTI-COLUMN DESIGN)
           ========================================================================= */}
       <footer style={{
-        background: 'var(--bg)',
+        background: 'var(--surface)',
         borderTop: '1px solid var(--border)',
-        padding: '3rem 0 2rem 0'
+        padding: 'clamp(3rem, 6vw, 4.5rem) 0 2rem 0'
       }}>
         <div className="content-wrapper">
+          {/* Main Footer Multi-Column Grid */}
           <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: '1.5rem',
-            paddingBottom: '2rem',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: 'clamp(2rem, 4vw, 3.5rem)',
+            paddingBottom: '3rem',
             borderBottom: '1px solid var(--border-light)'
           }}>
-            {/* Logo & Tagline */}
-            <div>
-              <NextStepLogo size="md" showTagline={true} />
+            {/* Column 1: Brand & Philosophy */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <NextStepLogo size="md" showTagline={false} />
+              <p style={{
+                fontSize: '0.86rem',
+                color: 'var(--text-muted)',
+                lineHeight: 1.6,
+                margin: 0
+              }}>
+                A calmer, evidence-based productivity framework designed to defeat planning paralysis and turn overwhelming ambitions into seven clear, daily actions.
+              </p>
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                background: 'var(--surface-sage-light)',
+                border: '1px solid var(--surface-sage)',
+                padding: '0.35rem 0.75rem',
+                borderRadius: 'var(--radius-pill)',
+                fontSize: '0.76rem',
+                color: 'var(--primary-dark)',
+                fontWeight: 600,
+                width: 'fit-content'
+              }}>
+                <Lock size={12} color="var(--primary)" />
+                <span>100% Client-Side Local Storage</span>
+              </div>
             </div>
 
-            {/* Footer Navigation */}
-            <nav style={{ display: 'flex', gap: '1.5rem', fontSize: '0.88rem' }} aria-label="Footer">
-              <button
-                type="button"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                style={{ color: 'var(--text-muted)', cursor: 'pointer' }}
-              >
-                Home
-              </button>
-              <button
-                type="button"
-                onClick={() => onExploreGoals && onExploreGoals()}
-                style={{ color: 'var(--text-muted)', cursor: 'pointer' }}
-              >
-                Explore Goals
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollToSection('how-it-works')}
-                style={{ color: 'var(--text-muted)', cursor: 'pointer' }}
-              >
-                How It Works
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigateToAbout && onNavigateToAbout()}
-                style={{ color: 'var(--text-muted)', cursor: 'pointer' }}
-              >
-                About
-              </button>
-            </nav>
+            {/* Column 2: Sprint Methodology */}
+            <div>
+              <div style={{
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'var(--primary-dark)',
+                marginBottom: '1rem'
+              }}>
+                Methodology
+              </div>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.88rem' }}>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection('cognitive-science')}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 0, textAlign: 'left', transition: 'color 0.15s ease' }}
+                  >
+                    The 90-Day Trap vs. 7-Day Sprint
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection('how-it-works')}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 0, textAlign: 'left', transition: 'color 0.15s ease' }}
+                  >
+                    Atomic 3-Step Execution
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection('product-comparison')}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 0, textAlign: 'left', transition: 'color 0.15s ease' }}
+                  >
+                    Feature Comparison Matrix
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection('faq')}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 0, textAlign: 'left', transition: 'color 0.15s ease' }}
+                  >
+                    Frequently Asked Questions
+                  </button>
+                </li>
+              </ul>
+            </div>
 
-            {/* Social Icons */}
-            <div style={{ display: 'flex', gap: '0.85rem', color: 'var(--text-muted)' }}>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: 'var(--text-muted)', padding: '0.35rem' }}
-                aria-label="Twitter"
-              >
-                <Twitter size={17} />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: 'var(--text-muted)', padding: '0.35rem' }}
-                aria-label="Instagram"
-              >
-                <Instagram size={17} />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: 'var(--text-muted)', padding: '0.35rem' }}
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={17} />
-              </a>
+            {/* Column 3: Category Blueprints */}
+            <div>
+              <div style={{
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'var(--primary-dark)',
+                marginBottom: '1rem'
+              }}>
+                Action Blueprints
+              </div>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.88rem' }}>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => onExploreGoals && onExploreGoals('Career')}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 0, textAlign: 'left', transition: 'color 0.15s ease' }}
+                  >
+                    Career &amp; Technical Interviews
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => onExploreGoals && onExploreGoals('Study')}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 0, textAlign: 'left', transition: 'color 0.15s ease' }}
+                  >
+                    Exam Prep &amp; Academic Sprints
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => onExploreGoals && onExploreGoals('Personal Project')}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 0, textAlign: 'left', transition: 'color 0.15s ease' }}
+                  >
+                    SaaS MVP &amp; Solo Builds
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => onExploreGoals && onExploreGoals('Skill Building')}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 0, textAlign: 'left', transition: 'color 0.15s ease' }}
+                  >
+                    Deep Skill Mastery &amp; Systems
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 4: Hackathon Project & Open Source */}
+            <div>
+              <div style={{
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'var(--primary-dark)',
+                marginBottom: '1rem'
+              }}>
+                Hackathon Submission
+              </div>
+              <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', lineHeight: 1.55, marginBottom: '1rem' }}>
+                Created for the <strong>Build with AI: Basics</strong> Devpost Hackathon. Zero tracking, zero ads, 100% open source under the MIT License.
+              </p>
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                <a
+                  href="https://github.com/Sahrish351/NEXTSTEP.git"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.45rem',
+                    background: 'var(--bg)',
+                    border: '1px solid var(--border)',
+                    padding: '0.45rem 0.85rem',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: '0.82rem',
+                    fontWeight: 600,
+                    color: 'var(--text-main)',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <span>GitHub Repository ↗</span>
+                </a>
+                {onNavigateToAbout && (
+                  <button
+                    type="button"
+                    onClick={onNavigateToAbout}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: 'var(--primary-dark)',
+                      fontSize: '0.82rem',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      padding: 0,
+                      textDecoration: 'underline'
+                    }}
+                  >
+                    About NextStep →
+                  </button>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Copyright and Legal Notice */}
+          {/* Bottom Bar: Copyright & Socials */}
           <div style={{
-            paddingTop: '1.5rem',
+            paddingTop: '2rem',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             flexWrap: 'wrap',
-            gap: '1rem',
-            fontSize: '0.8rem',
+            gap: '1.25rem',
+            fontSize: '0.82rem',
             color: 'var(--text-light)'
           }}>
             <div>
-              &copy; 2025 NextStep. All rights reserved.
+              &copy; {new Date().getFullYear()} NextStep. Built with pride for the Devpost Build with AI Hackathon.
             </div>
-            <div style={{ display: 'flex', gap: '1.25rem' }}>
-              <span>Privacy</span>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+              <span>MIT License</span>
               <span>&bull;</span>
-              <span>Terms</span>
+              <span>Client-Side LocalFirst</span>
               <span>&bull;</span>
-              <span>Contact</span>
+              <div style={{ display: 'flex', gap: '0.65rem' }}>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)' }} aria-label="Twitter">
+                  <Twitter size={15} />
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)' }} aria-label="Instagram">
+                  <Instagram size={15} />
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)' }} aria-label="LinkedIn">
+                  <Linkedin size={15} />
+                </a>
+              </div>
             </div>
           </div>
         </div>

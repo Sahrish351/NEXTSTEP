@@ -123,3 +123,4 @@ export const NextStepLogo: React.FC<NextStepLogoProps> = ({
     </div>
   );
 };
+
